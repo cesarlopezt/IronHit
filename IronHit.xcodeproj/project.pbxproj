@@ -11,6 +11,8 @@
 		DBCD19AE29E50B5A0061E615 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCD19AD29E50B5A0061E615 /* ContentView.swift */; };
 		DBCD19B029E50B5D0061E615 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBCD19AF29E50B5D0061E615 /* Assets.xcassets */; };
 		DBCD19B329E50B5D0061E615 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBCD19B229E50B5D0061E615 /* Preview Assets.xcassets */; };
+		DBCD19BB29E50B7E0061E615 /* IronHit.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DBCD19B929E50B7E0061E615 /* IronHit.xcdatamodeld */; };
+		DBCD19BD29E50BD30061E615 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCD19BC29E50BD30061E615 /* DataController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +21,8 @@
 		DBCD19AD29E50B5A0061E615 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		DBCD19AF29E50B5D0061E615 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DBCD19B229E50B5D0061E615 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		DBCD19BA29E50B7E0061E615 /* IronHit.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = IronHit.xcdatamodel; sourceTree = "<group>"; };
+		DBCD19BC29E50BD30061E615 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +57,8 @@
 			children = (
 				DBCD19AB29E50B5A0061E615 /* IronHitApp.swift */,
 				DBCD19AD29E50B5A0061E615 /* ContentView.swift */,
+				DBCD19B929E50B7E0061E615 /* IronHit.xcdatamodeld */,
+				DBCD19BC29E50BD30061E615 /* DataController.swift */,
 				DBCD19AF29E50B5D0061E615 /* Assets.xcassets */,
 				DBCD19B129E50B5D0061E615 /* Preview Content */,
 			);
@@ -137,6 +143,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBCD19BB29E50B7E0061E615 /* IronHit.xcdatamodeld in Sources */,
+				DBCD19BD29E50BD30061E615 /* DataController.swift in Sources */,
 				DBCD19AE29E50B5A0061E615 /* ContentView.swift in Sources */,
 				DBCD19AC29E50B5A0061E615 /* IronHitApp.swift in Sources */,
 			);
@@ -337,6 +345,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		DBCD19B929E50B7E0061E615 /* IronHit.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				DBCD19BA29E50B7E0061E615 /* IronHit.xcdatamodel */,
+			);
+			currentVersion = DBCD19BA29E50B7E0061E615 /* IronHit.xcdatamodel */;
+			path = IronHit.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = DBCD19A029E50B5A0061E615 /* Project object */;
 }
