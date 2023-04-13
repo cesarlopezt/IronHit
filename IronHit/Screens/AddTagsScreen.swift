@@ -8,11 +8,14 @@
 import SwiftUI
 
 struct AddTagsScreen: View {
+    @Environment(\.dismiss) var dismiss
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) var tags: FetchedResults<Tag>
     
     @State private var name = ""
     @State private var selectedTags: Set<Tag> = []
+    
+    var selectTags: (Set<Tag>) -> Void
     
     var body: some View {
         NavigationView {
@@ -45,6 +48,21 @@ struct AddTagsScreen: View {
             }
             .navigationTitle("Tags")
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Done") {
+                        selectTags(selectedTags)
+                        dismiss()
+                        
+                    }
+                    .disabled(selectedTags.isEmpty)
+                }
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Cancel") {
+                        dismiss()
+                    }
+                }
+            }
         }
     }
     
@@ -59,8 +77,8 @@ struct AddTagsScreen: View {
     }
 }
 
-struct AddTagsScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        AddTagsScreen()
-    }
-}
+//struct AddTagsScreen_Previews: PreviewProvider {
+//    static var previews: some View {
+//        AddTagsScreen()
+//    }
+//}

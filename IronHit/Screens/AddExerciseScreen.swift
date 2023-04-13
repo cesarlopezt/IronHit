@@ -33,18 +33,21 @@ struct AddExerciseScreen: View {
                 } header: {
                     Text("Description")
                 }
-                
-                
+
                 Button {
                     showingAddTags.toggle()
                 } label: {
                     VStack(alignment: .leading) {
-                        Text("Tags")
+                        HStack {
+                            Text("Tags")
+                            Spacer()
+                            // TODO: This doesn't work well on RTL languages
+                            Image(systemName: "chevron.right")
+                        }
                         TagsList(tags: tags)
                     }
-                    
+                    .foregroundColor(.primary)
                 }
-                
             }
             .navigationTitle("New exercise")
             .navigationBarTitleDisplayMode(.inline)
@@ -62,7 +65,7 @@ struct AddExerciseScreen: View {
                 }
             }
             .sheet(isPresented: $showingAddTags) {
-                AddTagsScreen()
+                AddTagsScreen(selectTags: selectTags)
             }
         }
     }
@@ -72,12 +75,13 @@ struct AddExerciseScreen: View {
         exercise.id = UUID()
         exercise.name = name
         exercise.desc = description
+        exercise.tags = NSSet(array: tags)
         
         dismiss()
     }
     
-    func selectTags(selectedTags: [Tag]) {
-        tags = selectedTags
+    func selectTags(selectedTags: Set<Tag>) {
+        tags = Array(selectedTags)
     }
 }
 
