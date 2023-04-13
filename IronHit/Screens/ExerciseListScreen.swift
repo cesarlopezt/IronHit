@@ -7,10 +7,11 @@
 
 import SwiftUI
 
-struct ExerciseList: View {
+struct ExerciseListScreen: View {
     @Environment(\.managedObjectContext) var moc
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) var exercises: FetchedResults<Exercise>
     
-    @FetchRequest(sortDescriptors: []) var exercises: FetchedResults<Exercise>
+    @State private var showingAddExercise = false
     
     var body: some View {
         NavigationView {
@@ -19,15 +20,7 @@ struct ExerciseList: View {
                     ForEach(exercises, id: \.id) { exercise in
                         VStack(alignment: .leading, spacing: 5) {
                             Text(exercise.name ?? "")
-                            HStack {
-                                ForEach(exercise.tagArray) { tag in
-                                    Text(tag.wrappedName)
-                                        .font(.caption2)
-                                        .padding(5)
-                                        .background(.blue.opacity(0.3))
-                                        .clipShape(Capsule())
-                                }
-                            }
+                            TagsList(tags: exercise.tagArray)
                         }
                     }
                 }
@@ -74,12 +67,24 @@ struct ExerciseList: View {
                 }
             }
             .navigationTitle("Exercises")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        showingAddExercise.toggle()
+                    } label: {
+                        Label("Add Exercise", systemImage: "plus")
+                    }
+                }
+            }
+            .sheet(isPresented: $showingAddExercise) {
+                AddExerciseScreen()
+            }
         }
     }
 }
 
-struct ExerciseList_Previews: PreviewProvider {
+struct ExerciseListScreen_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ExerciseListScreen()
     }
 }

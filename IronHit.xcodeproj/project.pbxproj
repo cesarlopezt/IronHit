@@ -13,9 +13,12 @@
 		DBCD19B329E50B5D0061E615 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBCD19B229E50B5D0061E615 /* Preview Assets.xcassets */; };
 		DBCD19BB29E50B7E0061E615 /* IronHit.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DBCD19B929E50B7E0061E615 /* IronHit.xcdatamodeld */; };
 		DBCD19BD29E50BD30061E615 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCD19BC29E50BD30061E615 /* DataController.swift */; };
-		DBCD19C029E713430061E615 /* ExerciseList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCD19BF29E713430061E615 /* ExerciseList.swift */; };
+		DBCD19C029E713430061E615 /* ExerciseListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCD19BF29E713430061E615 /* ExerciseListScreen.swift */; };
 		DBCD19C329E716A40061E615 /* Exercise+Wrapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCD19C229E716A40061E615 /* Exercise+Wrapped.swift */; };
 		DBCD19C529E717300061E615 /* Tag+Wrapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCD19C429E717300061E615 /* Tag+Wrapped.swift */; };
+		DBCD19C729E7217E0061E615 /* AddExerciseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCD19C629E7217E0061E615 /* AddExerciseScreen.swift */; };
+		DBCD19CA29E7527B0061E615 /* TagsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCD19C929E7527B0061E615 /* TagsList.swift */; };
+		DBCD19CC29E754350061E615 /* AddTagsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCD19CB29E754350061E615 /* AddTagsScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,9 +29,12 @@
 		DBCD19B229E50B5D0061E615 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		DBCD19BA29E50B7E0061E615 /* IronHit.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = IronHit.xcdatamodel; sourceTree = "<group>"; };
 		DBCD19BC29E50BD30061E615 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
-		DBCD19BF29E713430061E615 /* ExerciseList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseList.swift; sourceTree = "<group>"; };
+		DBCD19BF29E713430061E615 /* ExerciseListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseListScreen.swift; sourceTree = "<group>"; };
 		DBCD19C229E716A40061E615 /* Exercise+Wrapped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Exercise+Wrapped.swift"; sourceTree = "<group>"; };
 		DBCD19C429E717300061E615 /* Tag+Wrapped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tag+Wrapped.swift"; sourceTree = "<group>"; };
+		DBCD19C629E7217E0061E615 /* AddExerciseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExerciseScreen.swift; sourceTree = "<group>"; };
+		DBCD19C929E7527B0061E615 /* TagsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsList.swift; sourceTree = "<group>"; };
+		DBCD19CB29E754350061E615 /* AddTagsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTagsScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +67,7 @@
 		DBCD19AA29E50B5A0061E615 /* IronHit */ = {
 			isa = PBXGroup;
 			children = (
+				DBCD19C829E7525E0061E615 /* Components */,
 				DBCD19C129E716690061E615 /* Models */,
 				DBCD19BE29E7132A0061E615 /* Screens */,
 				DBCD19AB29E50B5A0061E615 /* IronHitApp.swift */,
@@ -84,7 +91,9 @@
 		DBCD19BE29E7132A0061E615 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				DBCD19BF29E713430061E615 /* ExerciseList.swift */,
+				DBCD19BF29E713430061E615 /* ExerciseListScreen.swift */,
+				DBCD19C629E7217E0061E615 /* AddExerciseScreen.swift */,
+				DBCD19CB29E754350061E615 /* AddTagsScreen.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -96,6 +105,14 @@
 				DBCD19C429E717300061E615 /* Tag+Wrapped.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		DBCD19C829E7525E0061E615 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				DBCD19C929E7527B0061E615 /* TagsList.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -170,8 +187,11 @@
 			files = (
 				DBCD19BB29E50B7E0061E615 /* IronHit.xcdatamodeld in Sources */,
 				DBCD19C329E716A40061E615 /* Exercise+Wrapped.swift in Sources */,
+				DBCD19CA29E7527B0061E615 /* TagsList.swift in Sources */,
 				DBCD19C529E717300061E615 /* Tag+Wrapped.swift in Sources */,
-				DBCD19C029E713430061E615 /* ExerciseList.swift in Sources */,
+				DBCD19C729E7217E0061E615 /* AddExerciseScreen.swift in Sources */,
+				DBCD19C029E713430061E615 /* ExerciseListScreen.swift in Sources */,
+				DBCD19CC29E754350061E615 /* AddTagsScreen.swift in Sources */,
 				DBCD19BD29E50BD30061E615 /* DataController.swift in Sources */,
 				DBCD19AE29E50B5A0061E615 /* ContentView.swift in Sources */,
 				DBCD19AC29E50B5A0061E615 /* IronHitApp.swift in Sources */,
