@@ -13,9 +13,7 @@ struct AddTagsScreen: View {
     @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) var tags: FetchedResults<Tag>
     
     @State private var name = ""
-    @State private var selectedTags: Set<Tag> = []
-    
-    var selectTags: (Set<Tag>) -> Void
+    @Binding var selectedTags: Set<Tag>
     
     var body: some View {
         NavigationView {
@@ -51,15 +49,7 @@ struct AddTagsScreen: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Done") {
-                        selectTags(selectedTags)
-                        dismiss()
-                        
-                    }
-                    .disabled(selectedTags.isEmpty)
-                }
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Cancel") {
-                        dismiss()
+                        dismiss()   
                     }
                 }
             }

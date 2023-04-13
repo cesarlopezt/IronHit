@@ -27,15 +27,15 @@ struct ExerciseListScreen: View {
                 Button("Add mock data") {
                     let armTag = Tag(context: moc)
                     armTag.id = UUID()
-                    armTag.name = "Arm"
+                    armTag.name = "Arms"
                     
                     let bicepTag = Tag(context: moc)
                     bicepTag.id = UUID()
-                    bicepTag.name = "Bicep"
+                    bicepTag.name = "Biceps"
                     
                     let tricepTag = Tag(context: moc)
                     tricepTag.id = UUID()
-                    tricepTag.name = "Tricep"
+                    tricepTag.name = "Triceps"
                     
                     let backTag = Tag(context: moc)
                     backTag.id = UUID()
@@ -43,25 +43,25 @@ struct ExerciseListScreen: View {
                     
                     let exercise1 = Exercise(context: moc)
                     exercise1.id = UUID()
-                    exercise1.name = "Bicep Curl"
+                    exercise1.name = "Biceps Curl"
                     exercise1.desc = "Test Descr"
                     exercise1.tags = NSSet(array: [armTag, bicepTag])
                     
                     let exercise2 = Exercise(context: moc)
                     exercise2.id = UUID()
-                    exercise2.name = "Tricep Extension"
+                    exercise2.name = "Triceps Extension"
                     exercise2.desc = "Test Descr"
                     exercise2.tags = NSSet(array: [armTag, tricepTag])
                     
                     let exercise3 = Exercise(context: moc)
                     exercise3.id = UUID()
-                    exercise3.name = "PullUps"
+                    exercise3.name = "Pull Ups"
                     exercise3.desc = "Test Descr"
                     exercise3.tags = NSSet(array: [backTag])
                     
                     let exercise4 = Exercise(context: moc)
                     exercise4.id = UUID()
-                    exercise4.name = "ChinUps"
+                    exercise4.name = "Chin Ups"
                     exercise4.desc = "Test Descr"
                     exercise4.tags = NSSet(array: [armTag, bicepTag])
                 }

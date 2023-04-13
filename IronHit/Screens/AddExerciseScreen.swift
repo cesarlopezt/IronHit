@@ -14,7 +14,7 @@ struct AddExerciseScreen: View {
     @State private var showingAddTags = false
     @State private var name = ""
     @State private var description = ""
-    @State private var tags: [Tag] = []
+    @State private var tags: Set<Tag> = []
     
     var isSaveDisabled: Bool {
         name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
@@ -44,7 +44,8 @@ struct AddExerciseScreen: View {
                             // TODO: This doesn't work well on RTL languages
                             Image(systemName: "chevron.right")
                         }
-                        TagsList(tags: tags)
+                        // TODO: I don't think I should convert this on each render
+                        TagsList(tags: Array(tags))
                     }
                     .foregroundColor(.primary)
                 }
@@ -65,7 +66,7 @@ struct AddExerciseScreen: View {
                 }
             }
             .sheet(isPresented: $showingAddTags) {
-                AddTagsScreen(selectTags: selectTags)
+                AddTagsScreen(selectedTags: $tags)
             }
         }
     }
@@ -75,13 +76,9 @@ struct AddExerciseScreen: View {
         exercise.id = UUID()
         exercise.name = name
         exercise.desc = description
-        exercise.tags = NSSet(array: tags)
+        exercise.tags = NSSet(set: tags)
         
         dismiss()
-    }
-    
-    func selectTags(selectedTags: Set<Tag>) {
-        tags = Array(selectedTags)
     }
 }
 
