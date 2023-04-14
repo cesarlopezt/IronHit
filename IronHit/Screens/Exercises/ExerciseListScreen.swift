@@ -17,9 +17,9 @@ struct ExerciseListScreen: View {
         NavigationView {
             VStack {
                 List {
-                    ForEach(exercises, id: \.id) { exercise in
+                    ForEach(exercises) { exercise in
                         VStack(alignment: .leading, spacing: 5) {
-                            Text(exercise.name ?? "")
+                            Text(exercise.wrappedName)
                             TagsList(tags: exercise.tagArray)
                         }
                     }

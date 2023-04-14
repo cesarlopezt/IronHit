@@ -26,10 +26,8 @@ struct AddExerciseScreen: View {
                 TextField("Name", text: $name)
                 
                 Section {
-                    ZStack(alignment: .leading) {
-                        TextEditor(text: $description)
-                            .frame(height: 200)
-                    }
+                    TextEditor(text: $description)
+                        .frame(height: 200)
                 } header: {
                     Text("Description")
                 }

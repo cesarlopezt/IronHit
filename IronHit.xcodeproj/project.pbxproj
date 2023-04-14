@@ -19,6 +19,9 @@
 		DBCD19C729E7217E0061E615 /* AddExerciseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCD19C629E7217E0061E615 /* AddExerciseScreen.swift */; };
 		DBCD19CA29E7527B0061E615 /* TagsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCD19C929E7527B0061E615 /* TagsList.swift */; };
 		DBCD19CC29E754350061E615 /* AddTagsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCD19CB29E754350061E615 /* AddTagsScreen.swift */; };
+		DBCD19CE29E8AC830061E615 /* WorkoutListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCD19CD29E8AC830061E615 /* WorkoutListScreen.swift */; };
+		DBCD19D029E8ADFC0061E615 /* Workout+Wrapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCD19CF29E8ADFC0061E615 /* Workout+Wrapped.swift */; };
+		DBCD19D229E8B4090061E615 /* AddWorkoutScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCD19D129E8B4090061E615 /* AddWorkoutScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +38,9 @@
 		DBCD19C629E7217E0061E615 /* AddExerciseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExerciseScreen.swift; sourceTree = "<group>"; };
 		DBCD19C929E7527B0061E615 /* TagsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsList.swift; sourceTree = "<group>"; };
 		DBCD19CB29E754350061E615 /* AddTagsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTagsScreen.swift; sourceTree = "<group>"; };
+		DBCD19CD29E8AC830061E615 /* WorkoutListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutListScreen.swift; sourceTree = "<group>"; };
+		DBCD19CF29E8ADFC0061E615 /* Workout+Wrapped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Workout+Wrapped.swift"; sourceTree = "<group>"; };
+		DBCD19D129E8B4090061E615 /* AddWorkoutScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkoutScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,9 +97,8 @@
 		DBCD19BE29E7132A0061E615 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				DBCD19BF29E713430061E615 /* ExerciseListScreen.swift */,
-				DBCD19C629E7217E0061E615 /* AddExerciseScreen.swift */,
-				DBCD19CB29E754350061E615 /* AddTagsScreen.swift */,
+				DBCD19D429E9A48F0061E615 /* Workouts */,
+				DBCD19D329E9A4680061E615 /* Exercises */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -103,6 +108,7 @@
 			children = (
 				DBCD19C229E716A40061E615 /* Exercise+Wrapped.swift */,
 				DBCD19C429E717300061E615 /* Tag+Wrapped.swift */,
+				DBCD19CF29E8ADFC0061E615 /* Workout+Wrapped.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -113,6 +119,25 @@
 				DBCD19C929E7527B0061E615 /* TagsList.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		DBCD19D329E9A4680061E615 /* Exercises */ = {
+			isa = PBXGroup;
+			children = (
+				DBCD19BF29E713430061E615 /* ExerciseListScreen.swift */,
+				DBCD19C629E7217E0061E615 /* AddExerciseScreen.swift */,
+				DBCD19CB29E754350061E615 /* AddTagsScreen.swift */,
+			);
+			path = Exercises;
+			sourceTree = "<group>";
+		};
+		DBCD19D429E9A48F0061E615 /* Workouts */ = {
+			isa = PBXGroup;
+			children = (
+				DBCD19CD29E8AC830061E615 /* WorkoutListScreen.swift */,
+				DBCD19D129E8B4090061E615 /* AddWorkoutScreen.swift */,
+			);
+			path = Workouts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -186,6 +211,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				DBCD19BB29E50B7E0061E615 /* IronHit.xcdatamodeld in Sources */,
+				DBCD19D229E8B4090061E615 /* AddWorkoutScreen.swift in Sources */,
+				DBCD19CE29E8AC830061E615 /* WorkoutListScreen.swift in Sources */,
 				DBCD19C329E716A40061E615 /* Exercise+Wrapped.swift in Sources */,
 				DBCD19CA29E7527B0061E615 /* TagsList.swift in Sources */,
 				DBCD19C529E717300061E615 /* Tag+Wrapped.swift in Sources */,
@@ -193,6 +220,7 @@
 				DBCD19C029E713430061E615 /* ExerciseListScreen.swift in Sources */,
 				DBCD19CC29E754350061E615 /* AddTagsScreen.swift in Sources */,
 				DBCD19BD29E50BD30061E615 /* DataController.swift in Sources */,
+				DBCD19D029E8ADFC0061E615 /* Workout+Wrapped.swift in Sources */,
 				DBCD19AE29E50B5A0061E615 /* ContentView.swift in Sources */,
 				DBCD19AC29E50B5A0061E615 /* IronHitApp.swift in Sources */,
 			);

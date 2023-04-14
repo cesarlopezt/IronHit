@@ -25,7 +25,7 @@ struct AddTagsScreen: View {
                             addTag()
                         }
                 }
-                ForEach(tags, id: \.id) { tag in
+                ForEach(tags) { tag in
                     Button {
                         if (selectedTags.contains(tag)) {
                             selectedTags.remove(tag)
@@ -34,11 +34,8 @@ struct AddTagsScreen: View {
                         }
                     } label: {
                         HStack {
+                            Image(systemName: selectedTags.contains(tag) ? "checkmark.circle.fill" : "circle")
                             Text(tag.wrappedName)
-                            Spacer()
-                            if ( selectedTags.contains(tag)) {
-                                Image(systemName:"checkmark")
-                            }
                         }
                         .foregroundColor(.primary)
                     }

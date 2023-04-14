@@ -5,8 +5,6 @@
 //  Created by Cesar Lopez on 4/10/23.
 //
 
-import Foundation
-
 import CoreData
 import Foundation
 

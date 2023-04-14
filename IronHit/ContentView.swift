@@ -14,15 +14,18 @@ struct ContentView: View {
                 .tabItem {
                     Label("Exercises", systemImage: "dumbbell.fill")
                 }
-            VStack {}
+            WorkoutListScreen()
                 .tabItem {
                     Label("Workouts", systemImage: "figure.strengthtraining.traditional")
                 }
             VStack {}
                 .tabItem {
+                    Label("PRs", systemImage: "medal")
+                }
+            VStack {}
+                .tabItem {
                     Label("Calendar", systemImage: "calendar")
                 }
-            
         }
     }
 }

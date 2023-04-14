@@ -5,11 +5,21 @@
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="tags" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="exercises" inverseEntity="Tag"/>
+        <relationship name="workoutEntries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ExerciseWorkoutEntry" inverseName="exercise" inverseEntity="ExerciseWorkoutEntry"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="name"/>
             </uniquenessConstraint>
         </uniquenessConstraints>
+    </entity>
+    <entity name="ExerciseWorkoutEntry" representedClassName="ExerciseWorkoutEntry" syncable="YES" codeGenerationType="class">
+        <attribute name="desc" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="order" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="reps" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="sets" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="exercise" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Exercise" inverseName="workoutEntries" inverseEntity="Exercise"/>
+        <relationship name="workout" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Workout" inverseName="exerciseEntries" inverseEntity="Workout"/>
     </entity>
     <entity name="Tag" representedClassName="Tag" syncable="YES" codeGenerationType="class">
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
@@ -20,5 +30,11 @@
                 <constraint value="name"/>
             </uniquenessConstraint>
         </uniquenessConstraints>
+    </entity>
+    <entity name="Workout" representedClassName="Workout" syncable="YES" codeGenerationType="class">
+        <attribute name="desc" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="exerciseEntries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ExerciseWorkoutEntry" inverseName="workout" inverseEntity="ExerciseWorkoutEntry"/>
     </entity>
 </model>
