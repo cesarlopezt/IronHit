@@ -38,6 +38,9 @@ struct CreateWorkoutScreen: View {
                 ForEach(viewModel.workoutExercises) {
                     ExerciseCell(exerciseRepsScheme: $0)
                 }
+                .onMove { source, destination in
+                    viewModel.workoutExercises.move(fromOffsets: source, toOffset: destination)
+                }
             } header: {
                 Text("Exercises")
             }
