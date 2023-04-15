@@ -11,8 +11,6 @@ struct WorkoutListScreen: View {
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) var workouts: FetchedResults<Workout>
     
-    @State private var showingAddWorkout = false
-    
     var body: some View {
         NavigationView {
             VStack {
@@ -27,15 +25,12 @@ struct WorkoutListScreen: View {
             .navigationTitle("Workouts")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        showingAddWorkout.toggle()
+                    NavigationLink {
+                        AddWorkoutScreen()
                     } label: {
                         Label("Add Workout", systemImage: "plus")
                     }
                 }
-            }
-            .sheet(isPresented: $showingAddWorkout) {
-                AddWorkoutScreen()
             }
         }
     }
