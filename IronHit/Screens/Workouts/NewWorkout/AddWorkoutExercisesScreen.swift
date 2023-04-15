@@ -16,20 +16,27 @@ struct AddWorkoutExercisesScreen: View {
     var body: some View {
         Form {
             Section {
-                ForEach(Array(viewModel.workoutExercises.enumerated()), id: \.offset) { index, ex in
-                    HStack {
-                        Text(ex.exercise.wrappedName)
-                        Divider()
-                        TextField("Reps", value: $viewModel.workoutExercises[index].reps, format: .number)
-                            .keyboardType(.numberPad)
-                        Divider()
-                        TextField("Sets", value: $viewModel.workoutExercises[index].sets, format: .number)
-                            .keyboardType(.numberPad)
+                Grid {
+                    GridRow {
+                        Text("")
+                        Text("Reps")
+                        Text("Sets")
+                    }
+                    ForEach(Array(viewModel.workoutExercises.enumerated()), id: \.offset) { index, ex in
+                        GridRow {
+                            Text(ex.exercise.wrappedName)
+                            TextField("Reps", value: $viewModel.workoutExercises[index].reps, format: .number)
+                                .keyboardType(.numberPad)
+                                .textFieldStyle(.roundedBorder)
+                            TextField("Sets", value: $viewModel.workoutExercises[index].sets, format: .number)
+                                .keyboardType(.numberPad)
+                                .textFieldStyle(.roundedBorder)
+                        }
                     }
                 }
             }
         }
-        .navigationTitle("Add the Reps. Scheme")
+        .navigationTitle("Rep Scheme")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -42,10 +49,6 @@ struct AddWorkoutExercisesScreen: View {
         }
         .onAppear {
             viewModel.updateWorkoutExercises()
-//            viewModel.workoutExercises
-//            workoutExercises = viewModel.exercises.map({ exercise in
-//                ExerciseRepsScheme(exercise: exercise, reps: 0, sets: 0)
-//            })
         }
     }
 }

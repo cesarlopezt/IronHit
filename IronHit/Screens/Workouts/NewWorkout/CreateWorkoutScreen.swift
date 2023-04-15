@@ -12,9 +12,11 @@ struct ExerciseCell: View {
     
     var body: some View {
         HStack {
+            Image(systemName: "line.3.horizontal")
+                .foregroundColor(.primary.opacity(0.2))
             Text(exerciseRepsScheme.exercise.wrappedName)
-            Text(exerciseRepsScheme.reps, format: .number)
-            Text(exerciseRepsScheme.sets, format: .number)
+            Spacer()
+            Text("\(exerciseRepsScheme.reps) x \(exerciseRepsScheme.sets)")
         }
     }
 }
@@ -41,13 +43,9 @@ struct CreateWorkoutScreen: View {
                 .onMove { source, destination in
                     viewModel.workoutExercises.move(fromOffsets: source, toOffset: destination)
                 }
-            } header: {
-                Text("Exercises")
             }
-
-            Button {
-            } label: {
-                Text(viewModel.workoutExercises.isEmpty ? "Add Exercises" : "Modify Exercises")
+        header: {
+                Text("Exercises")
             }
         }
         .navigationTitle("New workout")
