@@ -19,10 +19,32 @@ extension AddWorkoutScreen {
             name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && workoutExercises.isEmpty
         }
         
+        /// Function that sets workoutExercises.
+        /// * When empty adds all the selected exercises
+        /// * Filters out deselected items
+        /// * Adds new to list of workoutExercises
         func updateWorkoutExercises() {
-            workoutExercises = exercises.map({ exercise in
-                ExerciseRepsScheme(exercise: exercise, reps: 0, sets: 0)
-            })
+            if workoutExercises.isEmpty {
+                workoutExercises = exercises.map({ newRepScheme(exercise: $0) })
+                return
+            }
+            
+            let prevSelectedExercises = Set(workoutExercises.map({ $0.exercise }))
+
+            // Filter out deselected items
+            let deselectedExercises = prevSelectedExercises.subtracting(exercises)
+            workoutExercises = workoutExercises.filter { repScheme in
+                !deselectedExercises.contains(repScheme.exercise)
+            }
+            
+            // Add new Exercises
+            let newExercises = exercises.subtracting(prevSelectedExercises)
+            let newRepSchemes = newExercises.map({ newRepScheme(exercise: $0) })
+            workoutExercises.append(contentsOf: newRepSchemes)
+        }
+        
+        private func newRepScheme(exercise: Exercise) -> ExerciseRepsScheme {
+            return ExerciseRepsScheme(exercise: exercise, reps: 0, sets: 0)
         }
     }
 }

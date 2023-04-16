@@ -13,6 +13,7 @@ struct SelectWorkoutExercisesScreen: View {
     @ObservedObject var viewModel: AddWorkoutScreen.ViewModel
     
     var body: some View {
+        // TODO: I Could probably use the selection param in lists and set EditMode to true
         List {
             ForEach(exercises) { exercise in
                 Button {
