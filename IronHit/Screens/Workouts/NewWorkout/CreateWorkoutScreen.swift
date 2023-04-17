@@ -64,7 +64,7 @@ struct CreateWorkoutScreen: View {
             workoutExercise.order = Int16(index)
             workoutExercise.workout = workout
         }
-        
+        try? moc.save()
         showingAddWorkout = false
     }
 }

@@ -7,14 +7,6 @@
 
 import SwiftUI
 
-//private struct ExerciseCell: View {
-//    var body: some View {
-//        HStack {
-//            Text($0.exercise?.wrappedName ?? "")
-//        }
-//    }
-//}
-
 struct WorkoutDetailScreen: View {
     let workout: Workout
     
@@ -35,6 +27,21 @@ struct WorkoutDetailScreen: View {
                 Text("Exercises")
             }
         }
+        .overlay(alignment: .bottom) {
+            Button {
+                
+            } label: {
+                Label("Start workout", systemImage: "play.fill")
+                    .foregroundColor(.white)
+                    .font(.title3)
+                    .padding(.horizontal, 15)
+                    .padding(.vertical, 10)
+                    .background(.blue)
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+            }
+            .padding(.bottom, 20)
+        }
+
         .navigationTitle(workout.wrappedName)
         .navigationBarTitleDisplayMode(.inline)
     }
