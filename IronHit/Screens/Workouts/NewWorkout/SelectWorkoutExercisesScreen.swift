@@ -11,6 +11,7 @@ struct SelectWorkoutExercisesScreen: View {
     @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) var exercises: FetchedResults<Exercise>
     
     @ObservedObject var viewModel: AddWorkoutScreen.ViewModel
+    @Binding var showingAddWorkout: Bool
     
     var body: some View {
         // TODO: I Could probably use the selection param in lists and set EditMode to true
@@ -36,10 +37,11 @@ struct SelectWorkoutExercisesScreen: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 NavigationLink {
-                    AddWorkoutExercisesScreen(viewModel: viewModel)
+                    AddWorkoutExercisesScreen(viewModel: viewModel, showingAddWorkout: $showingAddWorkout)
                 } label: {
                     Text("Next")
                 }
+                .disabled(viewModel.exercises.isEmpty)
             }
         }
     }

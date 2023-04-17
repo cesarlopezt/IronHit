@@ -10,8 +10,9 @@ import SwiftUI
 
 struct AddWorkoutScreen: View {
     @StateObject var viewModel = ViewModel()
+    @Binding var showingAddWorkout: Bool
 
     var body: some View {
-        SelectWorkoutExercisesScreen(viewModel: viewModel)
+        SelectWorkoutExercisesScreen(viewModel: viewModel, showingAddWorkout: $showingAddWorkout)
     }
 }

@@ -22,8 +22,10 @@ struct ExerciseCell: View {
 }
 
 struct CreateWorkoutScreen: View {
+    @Environment(\.dismiss) var dismiss
     @Environment(\.managedObjectContext) var moc
     @ObservedObject var viewModel: AddWorkoutScreen.ViewModel
+    @Binding var showingAddWorkout: Bool
     
     var body: some View {
         Form {
@@ -65,5 +67,17 @@ struct CreateWorkoutScreen: View {
         workout.id = UUID()
         workout.name = viewModel.name
         workout.desc = viewModel.description
+
+        for (index, repScheme) in Array(viewModel.workoutExercises.enumerated()) {
+            let workoutExercise = WorkoutExercise(context: moc)
+            workoutExercise.id = UUID()
+            workoutExercise.exercise = repScheme.exercise
+            workoutExercise.sets = Int16(repScheme.sets)
+            workoutExercise.sets = Int16(repScheme.sets)
+            workoutExercise.order = Int16(index)
+            workoutExercise.workout = workout
+        }
+        
+        showingAddWorkout = false
     }
 }

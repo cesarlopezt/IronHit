@@ -11,4 +11,12 @@ extension Workout {
     public var wrappedName: String {
         name ?? ""
     }
+    
+    public var exerciseEntriesArray: [WorkoutExercise] {
+        let set = exerciseEntries as? Set<WorkoutExercise> ?? []
+        
+        return set.sorted {
+            $0.exercise?.wrappedName ?? "" < $1.exercise?.wrappedName ?? ""
+        }
+    }
 }

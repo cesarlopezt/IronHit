@@ -12,6 +12,7 @@ import SwiftUI
 /// user to add more exercises.
 struct AddWorkoutExercisesScreen: View {
     @ObservedObject var viewModel: AddWorkoutScreen.ViewModel
+    @Binding var showingAddWorkout: Bool
 
     var body: some View {
         Form {
@@ -41,7 +42,7 @@ struct AddWorkoutExercisesScreen: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 NavigationLink {
-                    CreateWorkoutScreen(viewModel: viewModel)
+                    CreateWorkoutScreen(viewModel: viewModel, showingAddWorkout: $showingAddWorkout)
                 } label: {
                     Text("Next")
                 }
