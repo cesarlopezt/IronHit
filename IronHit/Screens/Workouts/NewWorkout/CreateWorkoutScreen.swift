@@ -7,19 +7,6 @@
 
 import SwiftUI
 
-struct ExerciseCell: View {
-    var exerciseRepsScheme: ExerciseRepsScheme
-    
-    var body: some View {
-        HStack {
-            Image(systemName: "line.3.horizontal")
-                .foregroundColor(.primary.opacity(0.2))
-            Text(exerciseRepsScheme.exercise.wrappedName)
-            Spacer()
-            Text("\(exerciseRepsScheme.reps) x \(exerciseRepsScheme.sets)")
-        }
-    }
-}
 
 struct CreateWorkoutScreen: View {
     @Environment(\.dismiss) var dismiss
@@ -40,7 +27,7 @@ struct CreateWorkoutScreen: View {
             
             Section {
                 ForEach(viewModel.workoutExercises) {
-                    ExerciseCell(exerciseRepsScheme: $0)
+                    RepsSchemeCell(exerciseName: $0.exercise.wrappedName, reps: $0.reps, sets: $0.sets, showReorder: true)
                 }
                 .onMove { source, destination in
                     viewModel.workoutExercises.move(fromOffsets: source, toOffset: destination)
@@ -72,8 +59,8 @@ struct CreateWorkoutScreen: View {
             let workoutExercise = WorkoutExercise(context: moc)
             workoutExercise.id = UUID()
             workoutExercise.exercise = repScheme.exercise
-            workoutExercise.sets = Int16(repScheme.sets)
-            workoutExercise.sets = Int16(repScheme.sets)
+            workoutExercise.reps = repScheme.reps
+            workoutExercise.sets = repScheme.sets
             workoutExercise.order = Int16(index)
             workoutExercise.workout = workout
         }

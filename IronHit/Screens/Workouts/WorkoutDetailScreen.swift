@@ -20,11 +20,22 @@ struct WorkoutDetailScreen: View {
     
     var body: some View {
         Form {
-            Section {
-                ForEach(workout.exerciseEntriesArray) {
-                    Text($0.exercise?.wrappedName ?? "")
+            if (workout.desc != nil) {
+                Section {
+                    Text(workout.desc ?? "")
+                } header: {
+                    Text("Description")
                 }
             }
+            Section {
+                ForEach(workout.exerciseEntriesArray) {
+                    RepsSchemeCell(exerciseName: $0.exercise?.wrappedName ?? "", reps: $0.reps, sets: $0.sets)
+                }
+            } header: {
+                Text("Exercises")
+            }
         }
+        .navigationTitle(workout.wrappedName)
+        .navigationBarTitleDisplayMode(.inline)
     }
 }

@@ -10,6 +10,6 @@ import Foundation
 struct ExerciseRepsScheme: Identifiable, Hashable {
     var id = UUID()
     var exercise: Exercise
-    var reps: Int
-    var sets: Int
+    var reps: Int16
+    var sets: Int16
 }
