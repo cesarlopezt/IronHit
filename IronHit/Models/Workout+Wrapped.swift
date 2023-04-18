@@ -16,7 +16,7 @@ extension Workout {
         let set = exerciseEntries as? Set<WorkoutExercise> ?? []
         
         return set.sorted {
-            $0.exercise?.wrappedName ?? "" < $1.exercise?.wrappedName ?? ""
+            $0.order < $1.order
         }
     }
 }

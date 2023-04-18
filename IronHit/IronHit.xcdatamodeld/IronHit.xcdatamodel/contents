@@ -14,7 +14,6 @@
         </uniquenessConstraints>
     </entity>
     <entity name="ExerciseLog" representedClassName="ExerciseLog" syncable="YES" codeGenerationType="class">
-        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="isCompleted" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="maxWeight" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
@@ -51,6 +50,7 @@
     <entity name="WorkoutLog" representedClassName="WorkoutLog" syncable="YES" codeGenerationType="class">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="isCompleted" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="notes" optional="YES" attributeType="String"/>
         <relationship name="exerciseLogs" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ExerciseLog" inverseName="workoutLog" inverseEntity="ExerciseLog"/>
         <relationship name="workout" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Workout" inverseName="workoutLogs" inverseEntity="Workout"/>

@@ -10,19 +10,39 @@ import SwiftUI
 struct WorkoutListScreen: View {
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) var workouts: FetchedResults<Workout>
+    @FetchRequest(sortDescriptors: [], predicate: NSPredicate(format: "isCompleted == false")) var workoutLogs: FetchedResults<WorkoutLog>
     @State private var showingAddWorkout = false
+    @State private var showingActiveWorkout = false
     
     var body: some View {
         NavigationView {
             VStack {
                 List {
+                    if (!workoutLogs.isEmpty) {
+                        Section {
+                            ForEach(workoutLogs) { workoutLog in
+                                NavigationLink {
+                                    ActiveWorkoutScreen()
+                                } label: {
+                                    Text(workoutLog.workout?.wrappedName ?? "")
+                                }
+                            }
+                        } header: {
+                            Text("Current workout")
+                        }
+                    }
+                    
                     ForEach(workouts) { workout in
-                        NavigationLink(destination: WorkoutDetailScreen(workout: workout)) {
+                        NavigationLink(destination: WorkoutDetailScreen(workout: workout, showingActiveWorkout: $showingActiveWorkout)) {
                             VStack(alignment: .leading, spacing: 5) {
                                 Text(workout.wrappedName)
                             }                            
                         }
                     }
+                }
+                
+                NavigationLink(destination: ActiveWorkoutScreen(), isActive: $showingActiveWorkout) {
+                    EmptyView()
                 }
             }
             .navigationTitle("Workouts")

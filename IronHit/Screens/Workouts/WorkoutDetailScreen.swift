@@ -20,11 +20,13 @@ private struct ExerciseCell: View {
 
 
 struct WorkoutDetailScreen: View {
-    let workout: Workout
+    var workout: Workout
+    @Binding var showingActiveWorkout: Bool
+    @Environment(\.managedObjectContext) var moc
     
     var body: some View {
         Form {
-            if (workout.desc != nil) {
+            if (workout.desc != nil && !workout.desc!.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty) {
                 Section {
                     Text(workout.desc ?? "")
                 } header: {
@@ -41,7 +43,21 @@ struct WorkoutDetailScreen: View {
         }
         .overlay(alignment: .bottom) {
             Button {
+                let workoutLog = WorkoutLog(context: moc)
+                workoutLog.id = UUID()
+                workoutLog.date = Date.now
+                workoutLog.workout = workout
+                workoutLog.isCompleted = false
                 
+                for exerciseEntry in workout.exerciseEntriesArray {
+                    let exerciseLog = ExerciseLog(context: moc)
+                    exerciseLog.id = UUID()
+                    exerciseLog.exercise = exerciseEntry.exercise
+                    exerciseLog.workoutLog = workoutLog
+                    exerciseLog.workoutExercise = exerciseEntry
+                    exerciseLog.isCompleted = false
+                }
+                showingActiveWorkout = true
             } label: {
                 Label("Start workout", systemImage: "play.fill")
                     .foregroundColor(.white)
