@@ -7,6 +7,18 @@
 
 import SwiftUI
 
+private struct ExerciseCell: View {
+    var workoutExercise: WorkoutExercise
+    var body: some View {
+        NavigationLink {
+            Text("Exercise detail")
+        } label: {
+            RepsSchemeCell(exerciseName: workoutExercise.exercise?.wrappedName ?? "", reps: workoutExercise.reps, sets: workoutExercise.sets)
+        }
+    }
+}
+
+
 struct WorkoutDetailScreen: View {
     let workout: Workout
     
@@ -21,7 +33,7 @@ struct WorkoutDetailScreen: View {
             }
             Section {
                 ForEach(workout.exerciseEntriesArray) {
-                    RepsSchemeCell(exerciseName: $0.exercise?.wrappedName ?? "", reps: $0.reps, sets: $0.sets)
+                    ExerciseCell(workoutExercise: $0)
                 }
             } header: {
                 Text("Exercises")

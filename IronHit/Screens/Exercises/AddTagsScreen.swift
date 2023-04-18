@@ -19,11 +19,17 @@ struct AddTagsScreen: View {
         NavigationView {
             List {
                 Section {
-                    TextField("Tag name", text: $name)
-                        .submitLabel(.done)
-                        .onSubmit {
+                    HStack {
+                        TextField("Add tag name", text: $name)
+                            .submitLabel(.done)
+                            .onSubmit {
+                                addTag()
+                            }
+                        Button("Add") {
                             addTag()
                         }
+                        .buttonStyle(.borderless)
+                    }
                 }
                 ForEach(tags) { tag in
                     Button {

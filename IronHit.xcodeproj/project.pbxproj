@@ -87,7 +87,7 @@
 		DBCD19AA29E50B5A0061E615 /* IronHit */ = {
 			isa = PBXGroup;
 			children = (
-				DBCD19D829E9F85F0061E615 /* ViewModel */,
+				DBCD19D829E9F85F0061E615 /* ViewModels */,
 				DBCD19C829E7525E0061E615 /* Components */,
 				DBCD19C129E716690061E615 /* Models */,
 				DBCD19BE29E7132A0061E615 /* Screens */,
@@ -169,12 +169,12 @@
 			path = NewWorkout;
 			sourceTree = "<group>";
 		};
-		DBCD19D829E9F85F0061E615 /* ViewModel */ = {
+		DBCD19D829E9F85F0061E615 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
 				DBCD19DA29E9F8780061E615 /* AddWorkoutViewModel.swift */,
 			);
-			name = ViewModel;
+			name = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

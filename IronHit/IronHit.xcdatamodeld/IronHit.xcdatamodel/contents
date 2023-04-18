@@ -4,6 +4,7 @@
         <attribute name="desc" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="exerciseLogs" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ExerciseLog" inverseName="exercise" inverseEntity="ExerciseLog"/>
         <relationship name="tags" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="exercises" inverseEntity="Tag"/>
         <relationship name="workoutEntries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="WorkoutExercise" inverseName="exercise" inverseEntity="WorkoutExercise"/>
         <uniquenessConstraints>
@@ -17,8 +18,8 @@
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="isCompleted" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="maxWeight" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="exercise" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Exercise"/>
-        <relationship name="workoutExercise" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WorkoutExercise"/>
+        <relationship name="exercise" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Exercise" inverseName="exerciseLogs" inverseEntity="Exercise"/>
+        <relationship name="workoutExercise" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WorkoutExercise" inverseName="exerciseLogs" inverseEntity="WorkoutExercise"/>
         <relationship name="workoutLog" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WorkoutLog" inverseName="exerciseLogs" inverseEntity="WorkoutLog"/>
     </entity>
     <entity name="Tag" representedClassName="Tag" syncable="YES" codeGenerationType="class">
@@ -44,13 +45,14 @@
         <attribute name="reps" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="sets" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="exercise" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Exercise" inverseName="workoutEntries" inverseEntity="Exercise"/>
+        <relationship name="exerciseLogs" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ExerciseLog" inverseName="workoutExercise" inverseEntity="ExerciseLog"/>
         <relationship name="workout" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Workout" inverseName="exerciseEntries" inverseEntity="Workout"/>
     </entity>
     <entity name="WorkoutLog" representedClassName="WorkoutLog" syncable="YES" codeGenerationType="class">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="notes" optional="YES" attributeType="String"/>
-        <relationship name="exerciseLogs" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ExerciseLog" inverseName="workoutLog" inverseEntity="ExerciseLog"/>
+        <relationship name="exerciseLogs" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ExerciseLog" inverseName="workoutLog" inverseEntity="ExerciseLog"/>
         <relationship name="workout" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Workout" inverseName="workoutLogs" inverseEntity="Workout"/>
     </entity>
 </model>
