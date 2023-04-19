@@ -9,10 +9,10 @@ import CoreData
 import SwiftUI
 
 struct AddWorkoutScreen: View {
-    @StateObject var viewModel = ViewModel()
+    @StateObject var addWorkoutService = AddWorkoutService()
     @Binding var showingAddWorkout: Bool
 
     var body: some View {
-        SelectWorkoutExercisesScreen(viewModel: viewModel, showingAddWorkout: $showingAddWorkout)
+        SelectWorkoutExercisesScreen(addWorkoutService: addWorkoutService, showingAddWorkout: $showingAddWorkout)
     }
 }

@@ -11,7 +11,7 @@ import SwiftUI
 /// and set the number of sets and reps of each one, also allowing the
 /// user to add more exercises.
 struct AddWorkoutExercisesScreen: View {
-    @ObservedObject var viewModel: AddWorkoutScreen.ViewModel
+    @ObservedObject var addWorkoutService: AddWorkoutService
     @Binding var showingAddWorkout: Bool
 
     var body: some View {
@@ -23,13 +23,13 @@ struct AddWorkoutExercisesScreen: View {
                         Text("Reps")
                         Text("Sets")
                     }
-                    ForEach(Array(viewModel.workoutExercises.enumerated()), id: \.offset) { index, ex in
+                    ForEach(Array(addWorkoutService.workoutExercises.enumerated()), id: \.offset) { index, ex in
                         GridRow {
                             Text(ex.exercise.wrappedName)
-                            TextField("Reps", value: $viewModel.workoutExercises[index].reps, format: .number)
+                            TextField("Reps", value: $addWorkoutService.workoutExercises[index].reps, format: .number)
                                 .keyboardType(.numberPad)
                                 .textFieldStyle(.roundedBorder)
-                            TextField("Sets", value: $viewModel.workoutExercises[index].sets, format: .number)
+                            TextField("Sets", value: $addWorkoutService.workoutExercises[index].sets, format: .number)
                                 .keyboardType(.numberPad)
                                 .textFieldStyle(.roundedBorder)
                         }
@@ -42,14 +42,14 @@ struct AddWorkoutExercisesScreen: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 NavigationLink {
-                    CreateWorkoutScreen(viewModel: viewModel, showingAddWorkout: $showingAddWorkout)
+                    CreateWorkoutScreen(addWorkoutService: addWorkoutService, showingAddWorkout: $showingAddWorkout)
                 } label: {
                     Text("Next")
                 }
             }
         }
         .onAppear {
-            viewModel.updateWorkoutExercises()
+            addWorkoutService.updateWorkoutExercises()
         }
     }
 }

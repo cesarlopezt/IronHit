@@ -11,26 +11,26 @@ import SwiftUI
 struct CreateWorkoutScreen: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.managedObjectContext) var moc
-    @ObservedObject var viewModel: AddWorkoutScreen.ViewModel
+    @ObservedObject var addWorkoutService: AddWorkoutService
     @Binding var showingAddWorkout: Bool
     
     var body: some View {
         Form {
-            TextField("Name", text: $viewModel.name)
+            TextField("Name", text: $addWorkoutService.name)
             
             Section {
-                TextEditor(text: $viewModel.description)
+                TextEditor(text: $addWorkoutService.description)
                     .frame(height: 200)
             } header: {
                 Text("Description")
             }
             
             Section {
-                ForEach(viewModel.workoutExercises) {
+                ForEach(addWorkoutService.workoutExercises) {
                     RepsSchemeCell(exerciseName: $0.exercise.wrappedName, reps: $0.reps, sets: $0.sets, showReorder: true)
                 }
                 .onMove { source, destination in
-                    viewModel.workoutExercises.move(fromOffsets: source, toOffset: destination)
+                    addWorkoutService.workoutExercises.move(fromOffsets: source, toOffset: destination)
                 }
             }
         header: {
@@ -44,7 +44,7 @@ struct CreateWorkoutScreen: View {
                 Button("Save") {
                     saveWorkout()
                 }
-                .disabled(viewModel.isSaveDisabled)
+                .disabled(addWorkoutService.isSaveDisabled)
             }
         }
     }
@@ -52,10 +52,10 @@ struct CreateWorkoutScreen: View {
     func saveWorkout() {
         let workout = Workout(context: moc)
         workout.id = UUID()
-        workout.name = viewModel.name
-        workout.desc = viewModel.description
+        workout.name = addWorkoutService.name
+        workout.desc = addWorkoutService.description
 
-        for (index, repScheme) in Array(viewModel.workoutExercises.enumerated()) {
+        for (index, repScheme) in Array(addWorkoutService.workoutExercises.enumerated()) {
             let workoutExercise = WorkoutExercise(context: moc)
             workoutExercise.id = UUID()
             workoutExercise.exercise = repScheme.exercise

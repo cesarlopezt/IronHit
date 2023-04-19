@@ -10,7 +10,7 @@ import SwiftUI
 struct SelectWorkoutExercisesScreen: View {
     @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) var exercises: FetchedResults<Exercise>
     
-    @ObservedObject var viewModel: AddWorkoutScreen.ViewModel
+    @ObservedObject var addWorkoutService: AddWorkoutService
     @Binding var showingAddWorkout: Bool
     
     var body: some View {
@@ -18,14 +18,14 @@ struct SelectWorkoutExercisesScreen: View {
         List {
             ForEach(exercises) { exercise in
                 Button {
-                    if (viewModel.exercises.contains(exercise)) {
-                        viewModel.exercises.remove(exercise)
+                    if (addWorkoutService.exercises.contains(exercise)) {
+                        addWorkoutService.exercises.remove(exercise)
                     } else {
-                        viewModel.exercises.insert(exercise)
+                        addWorkoutService.exercises.insert(exercise)
                     }
                 } label: {
                     HStack {
-                        Image(systemName: viewModel.exercises.contains(exercise) ? "checkmark.circle.fill" : "circle")
+                        Image(systemName: addWorkoutService.exercises.contains(exercise) ? "checkmark.circle.fill" : "circle")
                         Text(exercise.wrappedName)
                     }
                     .foregroundColor(.primary)
@@ -37,11 +37,11 @@ struct SelectWorkoutExercisesScreen: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 NavigationLink {
-                    AddWorkoutExercisesScreen(viewModel: viewModel, showingAddWorkout: $showingAddWorkout)
+                    AddWorkoutExercisesScreen(addWorkoutService: addWorkoutService, showingAddWorkout: $showingAddWorkout)
                 } label: {
                     Text("Next")
                 }
-                .disabled(viewModel.exercises.isEmpty)
+                .disabled(addWorkoutService.exercises.isEmpty)
             }
         }
     }
