@@ -20,9 +20,10 @@ private struct ExerciseCell: View {
 
 
 struct WorkoutDetailScreen: View {
+    @Environment(\.managedObjectContext) var moc
     var workout: Workout
     @Binding var showingActiveWorkout: Bool
-    @Environment(\.managedObjectContext) var moc
+    var hasActiveWorkout: Bool
     
     var body: some View {
         Form {
@@ -42,7 +43,7 @@ struct WorkoutDetailScreen: View {
             }
         }
         .overlay(alignment: .bottom) {
-            Button {
+            Button("Start workout") {
                 let workoutLog = WorkoutLog(context: moc)
                 workoutLog.id = UUID()
                 workoutLog.date = Date.now
@@ -58,16 +59,11 @@ struct WorkoutDetailScreen: View {
                     exerciseLog.isCompleted = false
                 }
                 showingActiveWorkout = true
-            } label: {
-                Label("Start workout", systemImage: "play.fill")
-                    .foregroundColor(.white)
-                    .font(.title3)
-                    .padding(.horizontal, 15)
-                    .padding(.vertical, 10)
-                    .background(.blue)
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
             }
+            .font(.title3)
+            .buttonStyle(.borderedProminent)
             .padding(.bottom, 20)
+            .disabled(hasActiveWorkout)
         }
 
         .navigationTitle(workout.wrappedName)

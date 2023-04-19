@@ -22,7 +22,7 @@ struct WorkoutListScreen: View {
                         Section {
                             ForEach(workoutLogs) { workoutLog in
                                 NavigationLink {
-                                    ActiveWorkoutScreen()
+                                    ActiveWorkoutScreen(workoutLog: workoutLog, showingActiveWorkout: .constant(true))
                                 } label: {
                                     Text(workoutLog.workout?.wrappedName ?? "")
                                 }
@@ -33,15 +33,15 @@ struct WorkoutListScreen: View {
                     }
                     
                     ForEach(workouts) { workout in
-                        NavigationLink(destination: WorkoutDetailScreen(workout: workout, showingActiveWorkout: $showingActiveWorkout)) {
+                        NavigationLink(destination: WorkoutDetailScreen(workout: workout, showingActiveWorkout: $showingActiveWorkout, hasActiveWorkout: !workoutLogs.isEmpty)) {
                             VStack(alignment: .leading, spacing: 5) {
                                 Text(workout.wrappedName)
                             }                            
                         }
                     }
                 }
-                
-                NavigationLink(destination: ActiveWorkoutScreen(), isActive: $showingActiveWorkout) {
+
+                NavigationLink(destination: ActiveWorkoutScreen(workoutLog: workoutLogs.first, showingActiveWorkout: $showingActiveWorkout), isActive: $showingActiveWorkout) {
                     EmptyView()
                 }
             }

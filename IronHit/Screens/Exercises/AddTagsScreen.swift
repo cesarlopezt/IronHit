@@ -20,7 +20,7 @@ struct AddTagsScreen: View {
             List {
                 Section {
                     HStack {
-                        TextField("Add tag name", text: $name)
+                        TextField("Add new tag", text: $name)
                             .submitLabel(.done)
                             .onSubmit {
                                 addTag()
