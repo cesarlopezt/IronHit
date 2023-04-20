@@ -38,7 +38,7 @@ struct ActiveWorkoutScreen: View {
     @Binding var showingActiveWorkout: Bool
 
     var body: some View {
-        if let workoutLog {
+        if let workoutLog, let workout = workoutLog.workout {
             List {
                 Section {
                     if (exerciseLogs.isEmpty) {
@@ -70,7 +70,7 @@ struct ActiveWorkoutScreen: View {
                     isWorkoutDone = true
                 }
             }
-            .navigationTitle(workoutLog.workout?.wrappedName ?? "Not found")
+            .navigationTitle(workout.wrappedName)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar(content: {
                 ToolbarItem {
@@ -90,19 +90,15 @@ struct ActiveWorkoutScreen: View {
                 }
             }
             .sheet(isPresented: $showingWorkoutDetail) {
-                if let workout = workoutLog.workout {
-                    NavigationView {
-                        WorkoutDetailScreen(workout: workout, showingActiveWorkout: $showingActiveWorkout, hasActiveWorkout: true, showingStartButton: false)
-                            .toolbar {
-                                ToolbarItem {
-                                    Button("Close") {
-                                        showingWorkoutDetail = false
-                                    }
+                NavigationView {
+                    WorkoutDetailScreen(workout: workout, showingActiveWorkout: $showingActiveWorkout, hasActiveWorkout: true, showingStartButton: false)
+                        .toolbar {
+                            ToolbarItem {
+                                Button("Close") {
+                                    showingWorkoutDetail = false
                                 }
                             }
-                    }
-                } else {
-                    Text("Workout not found")
+                        }
                 }
             }
         }
