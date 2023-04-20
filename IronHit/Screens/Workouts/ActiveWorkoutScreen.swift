@@ -38,8 +38,8 @@ struct ActiveWorkoutScreen: View {
     @Binding var showingActiveWorkout: Bool
 
     var body: some View {
-        List {
-            if (workoutLog != nil) {
+        if let workoutLog {
+            List {
                 Section {
                     if (exerciseLogs.isEmpty) {
                         Text("Looks like you are done with this workout!")
@@ -69,45 +69,47 @@ struct ActiveWorkoutScreen: View {
                 Button("Done") {
                     isWorkoutDone = true
                 }
-            } else {
-                Text("Sorry, workout not found, try again.")
             }
-        }
-        .navigationTitle(workoutLog?.workout?.wrappedName ?? "Not found")
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar(content: {
-            ToolbarItem {
-                Button {
-                    showingWorkoutDetail = true
-                } label: {
-                    Label("Workout Detail", systemImage: "info.circle")
+            .navigationTitle(workoutLog.workout?.wrappedName ?? "Not found")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar(content: {
+                ToolbarItem {
+                    Button {
+                        showingWorkoutDetail = true
+                    } label: {
+                        Label("Workout Detail", systemImage: "info.circle")
+                    }
                 }
-
+            })
+            .alert("Workout complete?", isPresented: $isWorkoutDone) {
+                Button("Not yet") {}
+                Button("Yes") {
+                    workoutLog.isCompleted = true
+                    try? moc.save()
+                    showingActiveWorkout = false
+                }
             }
-        })
-        .alert("Workout complete?", isPresented: $isWorkoutDone) {
-            Button("Not yet") {}
-            Button("Yes") {
-                workoutLog?.isCompleted = true
-                try? moc.save()
-                showingActiveWorkout = false
-            }
-        }
-        .sheet(isPresented: $showingWorkoutDetail) {
-            if let workout = workoutLog?.workout {
-                NavigationView {
-                    WorkoutDetailScreen(workout: workout, showingActiveWorkout: $showingActiveWorkout, hasActiveWorkout: true, showingStartButton: false)
-                        .toolbar {
-                            ToolbarItem {
-                                Button("Close") {
-                                    showingWorkoutDetail = false
+            .sheet(isPresented: $showingWorkoutDetail) {
+                if let workout = workoutLog.workout {
+                    NavigationView {
+                        WorkoutDetailScreen(workout: workout, showingActiveWorkout: $showingActiveWorkout, hasActiveWorkout: true, showingStartButton: false)
+                            .toolbar {
+                                ToolbarItem {
+                                    Button("Close") {
+                                        showingWorkoutDetail = false
+                                    }
                                 }
                             }
-                        }
+                    }
+                } else {
+                    Text("Workout not found")
                 }
-            } else {
-                Text("Workout not found")
             }
+        }
+        else {
+            Text("Sorry, workout not found, try again.")
+                .navigationTitle("Not found")
+                .navigationBarTitleDisplayMode(.inline)
         }
     }
 
