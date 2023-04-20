@@ -34,6 +34,7 @@ struct ActiveWorkoutScreen: View {
     @FetchRequest var completedExerciseLogs: FetchedResults<ExerciseLog>
     @FetchRequest var exerciseLogs: FetchedResults<ExerciseLog>
     @State private var isWorkoutDone = false
+    @State private var showingWorkoutDetail: Bool = false
     @Binding var showingActiveWorkout: Bool
 
     var body: some View {
@@ -71,12 +72,38 @@ struct ActiveWorkoutScreen: View {
         }
         .navigationTitle(workoutLog?.workout?.wrappedName ?? "Not found")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar(content: {
+            ToolbarItem {
+                Button {
+                    showingWorkoutDetail = true
+                } label: {
+                    Label("Workout Detail", systemImage: "info.circle")
+                }
+
+            }
+        })
         .alert("Workout complete?", isPresented: $isWorkoutDone) {
             Button("Not yet") {}
             Button("Yes") {
                 workoutLog?.isCompleted = true
                 try? moc.save()
                 showingActiveWorkout = false
+            }
+        }
+        .sheet(isPresented: $showingWorkoutDetail) {
+            if let workout = workoutLog?.workout {
+                NavigationView {
+                    WorkoutDetailScreen(workout: workout, showingActiveWorkout: $showingActiveWorkout, hasActiveWorkout: true, showingStartButton: false)
+                        .toolbar {
+                            ToolbarItem {
+                                Button("Close") {
+                                    showingWorkoutDetail = false
+                                }
+                            }
+                        }
+                }
+            } else {
+                Text("Workout not found")
             }
         }
     }

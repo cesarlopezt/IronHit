@@ -18,9 +18,13 @@ struct ExerciseListScreen: View {
             VStack {
                 List {
                     ForEach(exercises) { exercise in
-                        VStack(alignment: .leading, spacing: 5) {
-                            Text(exercise.wrappedName)
-                            TagsList(tags: exercise.tagArray)
+                        NavigationLink {
+                            ExerciseDetailScreen(exercise: exercise)
+                        } label: {
+                            VStack(alignment: .leading, spacing: 5) {
+                                Text(exercise.wrappedName)
+                                TagsList(tags: exercise.tagArray)
+                            }
                         }
                     }
                 }
