@@ -38,29 +38,32 @@ struct ActiveWorkoutScreen: View {
     @Binding var showingActiveWorkout: Bool
 
     var body: some View {
-        Form {
+        List {
             if (workoutLog != nil) {
                 Section {
-                    ForEach(exerciseLogs) { exerciseLog in
-                        ExerciseCell(exerciseLog: exerciseLog) {
-                            exerciseLog.isCompleted.toggle()
-                            try? moc.save()
+                    if (exerciseLogs.isEmpty) {
+                        Text("Looks like you are done with this workout!")
+                    } else {
+                        ForEach(exerciseLogs) { exerciseLog in
+                            ExerciseCell(exerciseLog: exerciseLog) {
+                                toggleExerciseLog(exerciseLog: exerciseLog)
+                            }
                         }
                     }
                 } header: {
                     Text("Exercises")
                 }
-            
-                Section {
-                    ForEach(completedExerciseLogs) { exerciseLog in
-                        ExerciseCell(exerciseLog: exerciseLog, isStriked: true) {
-                            exerciseLog.isCompleted.toggle()
-                            // TODO: I probably don't need to save on each click
-                            try? moc.save()
+                
+                if (!completedExerciseLogs.isEmpty) {
+                    Section {
+                        ForEach(completedExerciseLogs) { exerciseLog in
+                            ExerciseCell(exerciseLog: exerciseLog, isStriked: true) {
+                                toggleExerciseLog(exerciseLog: exerciseLog)
+                            }
                         }
+                    } header: {
+                        Text("Completed")
                     }
-                } header: {
-                    Text("Completed")
                 }
                 
                 Button("Done") {
@@ -106,6 +109,12 @@ struct ActiveWorkoutScreen: View {
                 Text("Workout not found")
             }
         }
+    }
+
+    func toggleExerciseLog(exerciseLog: ExerciseLog) -> Void {
+        exerciseLog.isCompleted.toggle()
+        // TODO: I probably don't need to save on each click
+        try? moc.save()
     }
     
     init(workoutLog: WorkoutLog?, showingActiveWorkout: Binding<Bool>) {
