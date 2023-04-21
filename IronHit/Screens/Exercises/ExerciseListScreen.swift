@@ -9,24 +9,21 @@ import SwiftUI
 
 struct ExerciseListScreen: View {
     @Environment(\.managedObjectContext) var moc
-    @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) var exercises: FetchedResults<Exercise>
+    
     
     @State private var showingAddExercise = false
+    @State private var showingTagFilters = false
+    @State private var queryString = ""
+    @State private var selectedTags: Set<Tag> = []
     
     var body: some View {
         NavigationView {
             VStack {
                 List {
-                    ForEach(exercises) { exercise in
-                        NavigationLink {
-                            ExerciseDetailScreen(exercise: exercise)
-                        } label: {
-                            VStack(alignment: .leading, spacing: 5) {
-                                Text(exercise.wrappedName)
-                                TagsList(tags: exercise.tagArray)
-                            }
-                        }
+                    if (showingTagFilters) {
+                        FilterByTagsSection(selectedTags: $selectedTags)
                     }
+                    ExerciseList(contains: queryString, with: selectedTags)
                 }
                 Button("Add mock data") {
                     let armTag = Tag(context: moc)
@@ -73,10 +70,17 @@ struct ExerciseListScreen: View {
             .navigationTitle("Exercises")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        showingAddExercise.toggle()
-                    } label: {
-                        Label("Add Exercise", systemImage: "plus")
+                    HStack {
+                        Button {
+                            showingTagFilters.toggle()
+                        } label: {
+                            Label("Filter by tags", systemImage: showingTagFilters ? "line.3.horizontal.decrease.circle.fill" : "line.3.horizontal.decrease.circle")
+                        }
+                        Button {
+                            showingAddExercise.toggle()
+                        } label: {
+                            Label("Add Exercise", systemImage: "plus")
+                        }
                     }
                 }
             }
@@ -84,6 +88,7 @@ struct ExerciseListScreen: View {
                 AddExerciseScreen()
             }
         }
+        .searchable(text: $queryString) {}
     }
 }
 
