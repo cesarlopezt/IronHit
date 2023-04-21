@@ -7,23 +7,18 @@
 
 import SwiftUI
 
-struct ExerciseList: View {
+struct ExerciseList<RowContent: View>: View {
     @FetchRequest var exercises: FetchedResults<Exercise>
+    
+    @ViewBuilder var rowContent: (Exercise) -> RowContent
     
     var body: some View {
         ForEach(exercises) { exercise in
-            NavigationLink {
-                ExerciseDetailScreen(exercise: exercise)
-            } label: {
-                VStack(alignment: .leading, spacing: 5) {
-                    Text(exercise.wrappedName)
-                    TagsList(tags: exercise.tagArray)
-                }
-            }
+            rowContent(exercise)
         }
     }
     
-    init(contains name: String, with tags: Set<Tag>) {
+    init(contains name: String, with tags: Set<Tag>, @ViewBuilder rowContent: @escaping (Exercise) -> RowContent) {
         let predicate: NSPredicate?
         
         let tagNames = tags.map({ $0.name ?? "" })
@@ -43,11 +38,15 @@ struct ExerciseList: View {
             sortDescriptors: [SortDescriptor(\.name)],
             predicate: predicate
         )
+        
+        self.rowContent = rowContent
     }
 }
 
 struct ExerciseList_Previews: PreviewProvider {
     static var previews: some View {
-        ExerciseList(contains: "", with: [])
+        ExerciseList(contains: "", with: []) {
+            Text($0.wrappedName)
+        }
     }
 }

@@ -23,7 +23,16 @@ struct ExerciseListScreen: View {
                     if (showingTagFilters) {
                         FilterByTagsSection(selectedTags: $selectedTags)
                     }
-                    ExerciseList(contains: queryString, with: selectedTags)
+                    ExerciseList(contains: queryString, with: selectedTags) { exercise in
+                        NavigationLink {
+                            ExerciseDetailScreen(exercise: exercise)
+                        } label: {
+                            VStack(alignment: .leading, spacing: 5) {
+                                Text(exercise.wrappedName)
+                                TagsList(tags: exercise.tagArray)
+                            }
+                        }
+                    }
                 }
                 Button("Add mock data") {
                     let armTag = Tag(context: moc)

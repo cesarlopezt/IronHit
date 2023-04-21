@@ -13,10 +13,14 @@ struct SelectWorkoutExercisesScreen: View {
     @ObservedObject var addWorkoutService: AddWorkoutService
     @Binding var showingAddWorkout: Bool
     
+    @State private var searchQuery = ""
+    @State private var selectedTags: Set<Tag> = []
+    
     var body: some View {
         // TODO: I Could probably use the selection param in lists and set EditMode to true
         List {
-            ForEach(exercises) { exercise in
+            FilterByTagsSection(selectedTags: $selectedTags)
+            ExerciseList(contains: searchQuery, with: selectedTags) { exercise in
                 Button {
                     if (addWorkoutService.exercises.contains(exercise)) {
                         addWorkoutService.exercises.remove(exercise)
@@ -44,5 +48,6 @@ struct SelectWorkoutExercisesScreen: View {
                 .disabled(addWorkoutService.exercises.isEmpty)
             }
         }
+        .searchable(text: $searchQuery, placement: .navigationBarDrawer(displayMode: .always))
     }
 }
