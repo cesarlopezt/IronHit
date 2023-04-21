@@ -32,6 +32,7 @@
 		DBCD1A0129EE450C0061E615 /* ActiveWorkoutScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCD1A0029EE450C0061E615 /* ActiveWorkoutScreen.swift */; };
 		DBCD1A0329EEEF5B0061E615 /* WorkoutLog+Wrapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCD1A0229EEEF5B0061E615 /* WorkoutLog+Wrapped.swift */; };
 		DBCD1A0529F014AF0061E615 /* ExerciseDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCD1A0429F014AF0061E615 /* ExerciseDetailScreen.swift */; };
+		DBCD1A0829F1E1DB0061E615 /* WorkoutLogListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCD1A0729F1E1DB0061E615 /* WorkoutLogListScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +62,7 @@
 		DBCD1A0029EE450C0061E615 /* ActiveWorkoutScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveWorkoutScreen.swift; sourceTree = "<group>"; };
 		DBCD1A0229EEEF5B0061E615 /* WorkoutLog+Wrapped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkoutLog+Wrapped.swift"; sourceTree = "<group>"; };
 		DBCD1A0429F014AF0061E615 /* ExerciseDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDetailScreen.swift; sourceTree = "<group>"; };
+		DBCD1A0729F1E1DB0061E615 /* WorkoutLogListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutLogListScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 		DBCD19BE29E7132A0061E615 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				DBCD1A0629F1E1360061E615 /* Calendar */,
 				DBCD19D429E9A48F0061E615 /* Workouts */,
 				DBCD19D329E9A4680061E615 /* Exercises */,
 			);
@@ -184,6 +187,14 @@
 				DBCD19DA29E9F8780061E615 /* AddWorkoutViewModel.swift */,
 			);
 			name = Services;
+			sourceTree = "<group>";
+		};
+		DBCD1A0629F1E1360061E615 /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				DBCD1A0729F1E1DB0061E615 /* WorkoutLogListScreen.swift */,
+			);
+			path = Calendar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -278,6 +289,7 @@
 				DBCD19AE29E50B5A0061E615 /* ContentView.swift in Sources */,
 				DBCD19AC29E50B5A0061E615 /* IronHitApp.swift in Sources */,
 				DBCD19DD29E9FB7A0061E615 /* SelectWorkoutExercisesScreen.swift in Sources */,
+				DBCD1A0829F1E1DB0061E615 /* WorkoutLogListScreen.swift in Sources */,
 				DBCD19E329EB89BC0061E615 /* WorkoutDetailScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

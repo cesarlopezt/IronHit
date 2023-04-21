@@ -15,4 +15,12 @@ extension WorkoutLog {
             $0.workoutExercise?.order ?? 0 < $1.workoutExercise?.order ?? 0
         }
     }
+    
+    @objc
+    public var dateString: String {
+        guard let date = self.date else { return "" }
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter.string(from: date)
+    }
 }
