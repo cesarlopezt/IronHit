@@ -18,11 +18,7 @@ struct ContentView: View {
                 .tabItem {
                     Label("Workouts", systemImage: "figure.strengthtraining.traditional")
                 }
-            VStack {}
-                .tabItem {
-                    Label("PRs", systemImage: "medal")
-                }
-            VStack {}
+            WorkoutLogListScreen()
                 .tabItem {
                     Label("Calendar", systemImage: "calendar")
                 }
