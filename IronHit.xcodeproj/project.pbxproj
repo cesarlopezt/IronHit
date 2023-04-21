@@ -35,6 +35,7 @@
 		DBCD1A0829F1E1DB0061E615 /* WorkoutLogListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCD1A0729F1E1DB0061E615 /* WorkoutLogListScreen.swift */; };
 		DBCD1A0C29F2C6D60061E615 /* ExerciseList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCD1A0B29F2C6D60061E615 /* ExerciseList.swift */; };
 		DBCD1A0E29F2D39C0061E615 /* FilterByTagsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCD1A0D29F2D39C0061E615 /* FilterByTagsSection.swift */; };
+		DBCD1A1029F2DF4B0061E615 /* WorkoutList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCD1A0F29F2DF4B0061E615 /* WorkoutList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +68,7 @@
 		DBCD1A0729F1E1DB0061E615 /* WorkoutLogListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutLogListScreen.swift; sourceTree = "<group>"; };
 		DBCD1A0B29F2C6D60061E615 /* ExerciseList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseList.swift; sourceTree = "<group>"; };
 		DBCD1A0D29F2D39C0061E615 /* FilterByTagsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterByTagsSection.swift; sourceTree = "<group>"; };
+		DBCD1A0F29F2DF4B0061E615 /* WorkoutList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,10 +148,11 @@
 		DBCD19C829E7525E0061E615 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				DBCD19C929E7527B0061E615 /* TagsList.swift */,
-				DBCD19E429EDAC180061E615 /* RepsSchemeCell.swift */,
 				DBCD1A0B29F2C6D60061E615 /* ExerciseList.swift */,
 				DBCD1A0D29F2D39C0061E615 /* FilterByTagsSection.swift */,
+				DBCD19C929E7527B0061E615 /* TagsList.swift */,
+				DBCD1A0F29F2DF4B0061E615 /* WorkoutList.swift */,
+				DBCD19E429EDAC180061E615 /* RepsSchemeCell.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -297,6 +300,7 @@
 				DBCD19AE29E50B5A0061E615 /* ContentView.swift in Sources */,
 				DBCD19AC29E50B5A0061E615 /* IronHitApp.swift in Sources */,
 				DBCD19DD29E9FB7A0061E615 /* SelectWorkoutExercisesScreen.swift in Sources */,
+				DBCD1A1029F2DF4B0061E615 /* WorkoutList.swift in Sources */,
 				DBCD1A0829F1E1DB0061E615 /* WorkoutLogListScreen.swift in Sources */,
 				DBCD19E329EB89BC0061E615 /* WorkoutDetailScreen.swift in Sources */,
 			);

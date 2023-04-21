@@ -13,6 +13,7 @@ struct WorkoutListScreen: View {
     @FetchRequest(sortDescriptors: [], predicate: NSPredicate(format: "isCompleted == false")) var workoutLogs: FetchedResults<WorkoutLog>
     @State private var showingAddWorkout = false
     @State private var showingActiveWorkout = false
+    @State private var queryString = ""
     
     var body: some View {
         NavigationView {
@@ -32,11 +33,11 @@ struct WorkoutListScreen: View {
                         }
                     }
                     
-                    ForEach(workouts) { workout in
+                    WorkoutList(contains: queryString) { workout in
                         NavigationLink(destination: WorkoutDetailScreen(workout: workout, showingActiveWorkout: $showingActiveWorkout, hasActiveWorkout: !workoutLogs.isEmpty)) {
                             VStack(alignment: .leading, spacing: 5) {
                                 Text(workout.wrappedName)
-                            }                            
+                            }
                         }
                     }
                 }
@@ -54,6 +55,7 @@ struct WorkoutListScreen: View {
                     }
                 }
             }
+            .searchable(text: $queryString)
         }
     }
 }
