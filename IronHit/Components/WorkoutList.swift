@@ -19,11 +19,13 @@ struct WorkoutList<RowContent: View>: View {
     }
     
     init(contains name: String, rowContent: @escaping (Workout) -> RowContent) {
-        var predicate: NSPredicate? = nil
+        var predicate: NSPredicate
 
         let nameIsEmpty = name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
         if !nameIsEmpty {
-            predicate = NSPredicate(format: "name CONTAINS[c] %@", name)
+            predicate = NSPredicate(format: "isShown == true AND name CONTAINS[c] %@", name)
+        } else {
+            predicate = NSPredicate(format: "isShown == true")
         }
         
         _workouts = FetchRequest<Workout>(

@@ -26,6 +26,7 @@ private struct ExerciseCell: View {
 struct WorkoutDetailScreen: View {
     @Environment(\.managedObjectContext) var moc
     var workout: Workout
+    @State private var showingDelete = false
     @Binding var showingActiveWorkout: Bool
     var hasActiveWorkout: Bool
     var showingStartButton: Bool = true
@@ -74,5 +75,24 @@ struct WorkoutDetailScreen: View {
         }
         .navigationTitle(workout.wrappedName)
         .navigationBarTitleDisplayMode(.inline)
+        .alert("Delete Workout", isPresented: $showingDelete, actions: {
+            Button("Delete", role: .destructive) { deleteWorkout() }
+        }, message: {
+            Text("Are you sure you want to delete \(workout.wrappedName)?")
+        })
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    showingDelete = true
+                } label: {
+                    Label("Delete", systemImage: "trash")
+                }
+            }
+        }
+    }
+    
+    func deleteWorkout() {
+        workout.isShown = false
+        try? moc.save()
     }
 }

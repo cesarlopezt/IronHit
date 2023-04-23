@@ -36,6 +36,7 @@
 		DBCD1A0C29F2C6D60061E615 /* ExerciseList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCD1A0B29F2C6D60061E615 /* ExerciseList.swift */; };
 		DBCD1A0E29F2D39C0061E615 /* FilterByTagsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCD1A0D29F2D39C0061E615 /* FilterByTagsSection.swift */; };
 		DBCD1A1029F2DF4B0061E615 /* WorkoutList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCD1A0F29F2DF4B0061E615 /* WorkoutList.swift */; };
+		DBCD1A1229F351A20061E615 /* WorkoutLogDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCD1A1129F351A20061E615 /* WorkoutLogDetailScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +70,7 @@
 		DBCD1A0B29F2C6D60061E615 /* ExerciseList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseList.swift; sourceTree = "<group>"; };
 		DBCD1A0D29F2D39C0061E615 /* FilterByTagsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterByTagsSection.swift; sourceTree = "<group>"; };
 		DBCD1A0F29F2DF4B0061E615 /* WorkoutList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutList.swift; sourceTree = "<group>"; };
+		DBCD1A1129F351A20061E615 /* WorkoutLogDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutLogDetailScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,6 +204,7 @@
 			isa = PBXGroup;
 			children = (
 				DBCD1A0729F1E1DB0061E615 /* WorkoutLogListScreen.swift */,
+				DBCD1A1129F351A20061E615 /* WorkoutLogDetailScreen.swift */,
 			);
 			path = Calendar;
 			sourceTree = "<group>";
@@ -303,6 +306,7 @@
 				DBCD1A1029F2DF4B0061E615 /* WorkoutList.swift in Sources */,
 				DBCD1A0829F1E1DB0061E615 /* WorkoutLogListScreen.swift in Sources */,
 				DBCD19E329EB89BC0061E615 /* WorkoutDetailScreen.swift in Sources */,
+				DBCD1A1229F351A20061E615 /* WorkoutLogDetailScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

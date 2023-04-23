@@ -19,19 +19,19 @@ struct ExerciseList<RowContent: View>: View {
     }
     
     init(contains name: String, with tags: Set<Tag>, @ViewBuilder rowContent: @escaping (Exercise) -> RowContent) {
-        let predicate: NSPredicate?
+        let predicate: NSPredicate
         
         let tagNames = tags.map({ $0.name ?? "" })
         let nameIsEmpty = name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
         let tagsIsEmpty = tagNames.isEmpty
         if !nameIsEmpty && !tagsIsEmpty {
-            predicate = NSPredicate(format: "name CONTAINS[c] %@ AND ANY tags.id IN %@", name, tagNames)
+            predicate = NSPredicate(format: "isShown == true AND name CONTAINS[c] %@ AND ANY tags.id IN %@", name, tagNames)
         } else if !nameIsEmpty {
-            predicate = NSPredicate(format: "name CONTAINS[c] %@", name)
+            predicate = NSPredicate(format: "isShown == true AND name CONTAINS[c] %@", name)
         } else if !tagsIsEmpty {
-            predicate = NSPredicate(format: "ANY tags.name IN %@", tagNames)
+            predicate = NSPredicate(format: "isShown == true AND ANY tags.name IN %@", tagNames)
         } else {
-            predicate = nil
+            predicate = NSPredicate(format: "isShown == true")
         }
         
         _exercises = FetchRequest<Exercise>(

@@ -83,11 +83,7 @@ struct ActiveWorkoutScreen: View {
             })
             .alert("Workout complete?", isPresented: $isWorkoutDone) {
                 Button("Not yet") {}
-                Button("Yes") {
-                    workoutLog.isCompleted = true
-                    try? moc.save()
-                    showingActiveWorkout = false
-                }
+                Button("Yes") { finishWorkout(workoutLog: workoutLog) }
             }
             .sheet(isPresented: $showingWorkoutDetail) {
                 NavigationView {
@@ -107,6 +103,13 @@ struct ActiveWorkoutScreen: View {
                 .navigationTitle("Not found")
                 .navigationBarTitleDisplayMode(.inline)
         }
+    }
+    
+    func finishWorkout(workoutLog: WorkoutLog) {
+        workoutLog.isCompleted = true
+        workoutLog.finishedAt = Date.now
+        try? moc.save()
+        showingActiveWorkout = false
     }
 
     func toggleExerciseLog(exerciseLog: ExerciseLog) -> Void {

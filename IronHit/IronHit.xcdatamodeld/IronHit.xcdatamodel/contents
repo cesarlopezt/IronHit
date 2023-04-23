@@ -3,15 +3,11 @@
     <entity name="Exercise" representedClassName="Exercise" syncable="YES" codeGenerationType="class">
         <attribute name="desc" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="isShown" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="exerciseLogs" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ExerciseLog" inverseName="exercise" inverseEntity="ExerciseLog"/>
         <relationship name="tags" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="exercises" inverseEntity="Tag"/>
         <relationship name="workoutEntries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="WorkoutExercise" inverseName="exercise" inverseEntity="WorkoutExercise"/>
-        <uniquenessConstraints>
-            <uniquenessConstraint>
-                <constraint value="name"/>
-            </uniquenessConstraint>
-        </uniquenessConstraints>
     </entity>
     <entity name="ExerciseLog" representedClassName="ExerciseLog" syncable="YES" codeGenerationType="class">
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
@@ -34,6 +30,7 @@
     <entity name="Workout" representedClassName="Workout" syncable="YES" codeGenerationType="class">
         <attribute name="desc" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="isShown" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="exerciseEntries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="WorkoutExercise" inverseName="workout" inverseEntity="WorkoutExercise"/>
         <relationship name="workoutLogs" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="WorkoutLog" inverseName="workout" inverseEntity="WorkoutLog"/>
@@ -49,6 +46,7 @@
     </entity>
     <entity name="WorkoutLog" representedClassName="WorkoutLog" syncable="YES" codeGenerationType="class">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="finishedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="isCompleted" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="notes" optional="YES" attributeType="String"/>

@@ -21,18 +21,23 @@ struct WorkoutLogListScreen: View {
                     ForEach(workoutLogsByDay) { day in
                         Section {
                             ForEach(day) { workoutLog in
-                                HStack {
-                                    Text(workoutLog.workout?.wrappedName ?? "")
-                                    Spacer()
-                                    if(!workoutLog.isCompleted) {
-                                        Text("CURRENT")
-                                            .textCase(.uppercase)
-                                            .font(.caption2)
-                                            .padding(5)
-                                            .background(.green.opacity(0.3))
-                                            .clipShape(RoundedRectangle(cornerRadius: 5))
+                                NavigationLink {
+                                    WorkoutLogDetailScreen(workoutLog: workoutLog)
+                                } label: {
+                                    HStack {
+                                        Text(workoutLog.workout?.wrappedName ?? "")
+                                        Spacer()
+                                        if(!workoutLog.isCompleted) {
+                                            Text("CURRENT")
+                                                .textCase(.uppercase)
+                                                .font(.caption2)
+                                                .padding(5)
+                                                .background(.green.opacity(0.3))
+                                                .clipShape(RoundedRectangle(cornerRadius: 5))
+                                        }
                                     }
                                 }
+
                             }
                         } header: {
                             Text(parseDate(from: day.id).formatted(date: .complete, time: .omitted))
