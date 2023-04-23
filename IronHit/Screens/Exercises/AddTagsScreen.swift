@@ -13,6 +13,8 @@ struct AddTagsScreen: View {
     @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) var tags: FetchedResults<Tag>
     
     @State private var name = ""
+    @State private var tagToDelete: Tag? = nil
+    @State private var showingDelete = false
     @Binding var selectedTags: Set<Tag>
     
     var body: some View {
@@ -32,18 +34,25 @@ struct AddTagsScreen: View {
                     }
                 }
                 ForEach(tags) { tag in
-                    Button {
-                        if (selectedTags.contains(tag)) {
-                            selectedTags.remove(tag)
-                        } else {
-                            selectedTags.insert(tag)
+                    HStack {
+                        Button { toggleTag(tag) } label: {
+                            HStack {
+                                Image(systemName: selectedTags.contains(tag) ? "checkmark.circle.fill" : "circle")
+                                Text(tag.wrappedName)
+                            }
+                            .foregroundColor(.primary)
                         }
-                    } label: {
-                        HStack {
-                            Image(systemName: selectedTags.contains(tag) ? "checkmark.circle.fill" : "circle")
-                            Text(tag.wrappedName)
+                        .buttonStyle(.plain)
+                        Spacer()
+                        Button(role: .destructive) {
+                            tagToDelete = tag
+                            showingDelete = true
+                        } label: {
+                            Label("Delete tag", systemImage: "trash")
+                                .labelStyle(.iconOnly)
                         }
-                        .foregroundColor(.primary)
+                        .buttonStyle(.borderless)
+
                     }
                 }
             }
@@ -56,6 +65,25 @@ struct AddTagsScreen: View {
                     }
                 }
             }
+            .alert("Delete Tag", isPresented: $showingDelete, actions: {
+                Button("Delete", role: .destructive) { deleteTag(tagToDelete) }
+            }, message: {
+                Text("Are you sure you want to delete \(tagToDelete?.wrappedName ?? "")?")
+            })
+        }
+    }
+    
+    func toggleTag(_ tag: Tag) {
+        if (selectedTags.contains(tag)) {
+            selectedTags.remove(tag)
+        } else {
+            selectedTags.insert(tag)
+        }
+    }
+    
+    func deleteTag(_ tag: Tag?) {
+        if let tag {
+            moc.delete(tag)
         }
     }
     
