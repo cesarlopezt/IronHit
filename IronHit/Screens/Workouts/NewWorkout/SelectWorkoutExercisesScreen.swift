@@ -12,28 +12,31 @@ struct SelectWorkoutExercisesScreen: View {
     
     @ObservedObject var addWorkoutService: AddWorkoutService
     @Binding var showingAddWorkout: Bool
-    
+
     @State private var searchQuery = ""
     @State private var selectedTags: Set<Tag> = []
-    
+
     var body: some View {
         // TODO: I Could probably use the selection param in lists and set EditMode to true
-        List {
-            FilterByTagsSection(selectedTags: $selectedTags)
-            ExerciseList(contains: searchQuery, with: selectedTags) { exercise in
-                Button {
-                    if (addWorkoutService.exercises.contains(exercise)) {
-                        addWorkoutService.exercises.remove(exercise)
-                    } else {
-                        addWorkoutService.exercises.insert(exercise)
-                    }
-                } label: {
-                    HStack {
-                        Image(systemName: addWorkoutService.exercises.contains(exercise) ? "checkmark.circle.fill" : "circle")
-                        Text(exercise.wrappedName)
-                    }
-                    .foregroundColor(.primary)
+        ExerciseList(
+            contains: searchQuery,
+            with: $selectedTags,
+            showingTagFilters: .constant(true),
+            showingAddExercise: .constant(false),
+            usingFilters: true
+        ) { exercise in
+            Button {
+                if (addWorkoutService.exercises.contains(exercise)) {
+                    addWorkoutService.exercises.remove(exercise)
+                } else {
+                    addWorkoutService.exercises.insert(exercise)
                 }
+            } label: {
+                HStack {
+                    Image(systemName: addWorkoutService.exercises.contains(exercise) ? "checkmark.circle.fill" : "circle")
+                    Text(exercise.wrappedName)
+                }
+                .foregroundColor(.primary)
             }
         }
         .navigationTitle("Select exercises")
