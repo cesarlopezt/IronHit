@@ -76,6 +76,7 @@ struct AddExerciseScreen: View {
         exercise.desc = description
         exercise.tags = NSSet(set: tags)
         
+        try? moc.save()
         dismiss()
     }
 }

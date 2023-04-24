@@ -94,6 +94,8 @@ struct AddTagsScreen: View {
             tag.name = name
             
             name = ""
+            
+            try? moc.save()
         }
     }
 }
