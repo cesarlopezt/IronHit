@@ -33,26 +33,29 @@ struct AddTagsScreen: View {
                         .buttonStyle(.borderless)
                     }
                 }
-                ForEach(tags) { tag in
-                    HStack {
-                        Button { toggleTag(tag) } label: {
-                            HStack {
-                                Image(systemName: selectedTags.contains(tag) ? "checkmark.circle.fill" : "circle")
-                                Text(tag.wrappedName)
+                if (tags.isEmpty) {
+                    Text("Add your first tag.")
+                } else {
+                    ForEach(tags) { tag in
+                        HStack {
+                            Button { toggleTag(tag) } label: {
+                                HStack {
+                                    Image(systemName: selectedTags.contains(tag) ? "checkmark.circle.fill" : "circle")
+                                    Text(tag.wrappedName)
+                                }
+                                .foregroundColor(.primary)
                             }
-                            .foregroundColor(.primary)
+                            .buttonStyle(.plain)
+                            Spacer()
+                            Button(role: .destructive) {
+                                tagToDelete = tag
+                                showingDelete = true
+                            } label: {
+                                Label("Delete tag", systemImage: "trash")
+                                    .labelStyle(.iconOnly)
+                            }
+                            .buttonStyle(.borderless)
                         }
-                        .buttonStyle(.plain)
-                        Spacer()
-                        Button(role: .destructive) {
-                            tagToDelete = tag
-                            showingDelete = true
-                        } label: {
-                            Label("Delete tag", systemImage: "trash")
-                                .labelStyle(.iconOnly)
-                        }
-                        .buttonStyle(.borderless)
-
                     }
                 }
             }

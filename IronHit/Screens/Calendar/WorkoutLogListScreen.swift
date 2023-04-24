@@ -16,8 +16,10 @@ struct WorkoutLogListScreen: View {
     
     var body: some View {
         NavigationView {
-            VStack {
-                List {
+            List {
+                if (workoutLogsByDay.isEmpty) {
+                    Text("Start working out to see all your past workouts on this tab.")
+                } else {
                     ForEach(workoutLogsByDay) { day in
                         Section {
                             ForEach(day) { workoutLog in
@@ -37,7 +39,6 @@ struct WorkoutLogListScreen: View {
                                         }
                                     }
                                 }
-
                             }
                         } header: {
                             Text(parseDate(from: day.id).formatted(date: .complete, time: .omitted))
@@ -45,6 +46,7 @@ struct WorkoutLogListScreen: View {
                     }
                 }
             }
+            .listStyle(.sidebar)
             .navigationTitle("Calendar")
         }
     }
