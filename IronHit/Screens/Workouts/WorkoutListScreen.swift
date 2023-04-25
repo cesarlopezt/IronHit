@@ -18,30 +18,41 @@ struct WorkoutListScreen: View {
     var body: some View {
         NavigationView {
             VStack {
-                List {
-                    if (!workoutLogs.isEmpty) {
-                        Section {
-                            ForEach(workoutLogs) { workoutLog in
-                                NavigationLink {
-                                    ActiveWorkoutScreen(workoutLog: workoutLog, showingActiveWorkout: .constant(true))
-                                } label: {
-                                    Text(workoutLog.workout?.wrappedName ?? "")
-                                }
-                            }
-                        } header: {
-                            Text("Current workout")
+                WorkoutList(
+                    contains: queryString,
+                    showingAddWorkout: $showingAddWorkout,
+                    usingFilters: !queryString.isEmpty
+                ) { workout in
+                    NavigationLink(
+                        destination: WorkoutDetailScreen(
+                            workout: workout,
+                            showingActiveWorkout: $showingActiveWorkout,
+                            hasActiveWorkout: !workoutLogs.isEmpty
+                        )
+                    ) {
+                        VStack(alignment: .leading, spacing: 5) {
+                            Text(workout.wrappedName)
                         }
                     }
-                    
-                    WorkoutList(contains: queryString) { workout in
-                        NavigationLink(destination: WorkoutDetailScreen(workout: workout, showingActiveWorkout: $showingActiveWorkout, hasActiveWorkout: !workoutLogs.isEmpty)) {
-                            VStack(alignment: .leading, spacing: 5) {
-                                Text(workout.wrappedName)
+                }  activeWorkout: {
+                    Group {
+                        if (!workoutLogs.isEmpty) {
+                            Section {
+                                ForEach(workoutLogs) { workoutLog in
+                                    NavigationLink {
+                                        ActiveWorkoutScreen(workoutLog: workoutLog, showingActiveWorkout: .constant(true))
+                                    } label: {
+                                        Text(workoutLog.workout?.wrappedName ?? "")
+                                    }
+                                }
+                            } header: {
+                                Text("Current workout")
                             }
+                        } else {
+                            EmptyView()
                         }
                     }
                 }
-
                 NavigationLink(destination: ActiveWorkoutScreen(workoutLog: workoutLogs.first, showingActiveWorkout: $showingActiveWorkout), isActive: $showingActiveWorkout) {
                     EmptyView()
                 }
