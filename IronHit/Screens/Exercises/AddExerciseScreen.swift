@@ -15,6 +15,7 @@ struct AddExerciseScreen: View {
     @State private var name = ""
     @State private var description = ""
     @State private var tags: Set<Tag> = []
+    var exerciseToUpdate: Exercise?
     
     var isSaveDisabled: Bool {
         name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
@@ -48,12 +49,12 @@ struct AddExerciseScreen: View {
                     .foregroundColor(.primary)
                 }
             }
-            .navigationTitle("New exercise")
+            .navigationTitle(exerciseToUpdate == nil ? "New exercise" : "Edit exercise")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Add") {
-                        saveExercise()
+                    Button(exerciseToUpdate == nil ? "Add" : "Save") {
+                        exerciseToUpdate == nil ? saveExercise() : editExercise()
                     }
                     .disabled(isSaveDisabled)
                 }
@@ -78,6 +79,24 @@ struct AddExerciseScreen: View {
         
         try? moc.save()
         dismiss()
+    }
+    
+    func editExercise() {
+        guard let exerciseToUpdate else { return }
+        exerciseToUpdate.name = name
+        exerciseToUpdate.desc = description
+        exerciseToUpdate.tags = NSSet(set: tags)
+        
+        try? moc.save()
+        dismiss()
+    }
+    
+    init(exerciseToUpdate: Exercise? = nil) {
+        self.exerciseToUpdate = exerciseToUpdate
+        guard let exerciseToUpdate else { return }
+        self._name = State(initialValue: exerciseToUpdate.name ?? "")
+        self._description = State(initialValue: exerciseToUpdate.desc ?? "")
+        self._tags = State(initialValue: Set(exerciseToUpdate.tagArray))
     }
 }
 

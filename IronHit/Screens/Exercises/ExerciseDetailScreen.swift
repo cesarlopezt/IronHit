@@ -11,6 +11,9 @@ struct ExerciseDetailScreen: View {
     @Environment(\.managedObjectContext) var moc;
     var exercise: Exercise
     @State private var showingDelete = false
+    @State private var showingEdit = false
+    // TODO: Find a better way, refreshId UUID is to refresh the page when edited
+    @State private var refreshId = UUID()
     
     var body: some View {
         Form {
@@ -29,12 +32,22 @@ struct ExerciseDetailScreen: View {
         })
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button {
-                    showingDelete = true
-                } label: {
-                    Label("Delete", systemImage: "trash")
+                HStack {
+                    Button {
+                        showingEdit = true
+                    } label: {
+                        Label("Edit", systemImage: "square.and.pencil")
+                    }
+                    Button {
+                        showingDelete = true
+                    } label: {
+                        Label("Delete", systemImage: "trash")
+                    }
                 }
             }
+        }
+        .sheet(isPresented: $showingEdit) {
+            AddExerciseScreen(exerciseToUpdate: exercise)
         }
     }
     
