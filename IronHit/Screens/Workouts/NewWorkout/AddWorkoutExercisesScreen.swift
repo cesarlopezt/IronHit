@@ -13,31 +13,48 @@ import SwiftUI
 struct AddWorkoutExercisesScreen: View {
     @ObservedObject var addWorkoutService: AddWorkoutService
     @Binding var showingAddWorkout: Bool
+    
+    @State private var showingSelectExercises = false
 
     var body: some View {
         Form {
             Section {
-                Grid {
-                    GridRow {
-                        Text("")
-                        Text("Reps")
-                        Text("Sets")
-                    }
-                    ForEach(Array(addWorkoutService.workoutExercises.enumerated()), id: \.offset) { index, ex in
+                if (addWorkoutService.workoutExercises.isEmpty) {
+                    Text("Let's add the exercises for this workout.")
+                } else {
+                    Grid {
                         GridRow {
-                            Text(ex.exercise.wrappedName)
-                            TextField("Reps", value: $addWorkoutService.workoutExercises[index].reps, format: .number)
-                                .keyboardType(.numberPad)
-                                .textFieldStyle(.roundedBorder)
-                            TextField("Sets", value: $addWorkoutService.workoutExercises[index].sets, format: .number)
-                                .keyboardType(.numberPad)
-                                .textFieldStyle(.roundedBorder)
+                            Text("")
+                            Text("Reps")
+                            Text("Sets")
+                            Text("")
+                        }
+                        ForEach(Array(addWorkoutService.workoutExercises.enumerated()), id: \.offset) { index, workoutExercise in
+                            GridRow {
+                                Text(workoutExercise.wrappedExerciseName)
+                                TextField("Reps", value: $addWorkoutService.workoutExercises[index].reps, format: .number)
+                                    .keyboardType(.numberPad)
+                                    .textFieldStyle(.roundedBorder)
+                                TextField("Sets", value: $addWorkoutService.workoutExercises[index].sets, format: .number)
+                                    .keyboardType(.numberPad)
+                                    .textFieldStyle(.roundedBorder)
+                                Button(role: .destructive) {
+                                    addWorkoutService.removeWorkoutExercise(at: index)
+                                } label: {
+                                    Label("Delete", systemImage: "trash")
+                                        .labelStyle(.iconOnly)
+                                }
+                                .buttonStyle(.borderless)
+                            }
                         }
                     }
                 }
             }
+            Button("Add exercises") {
+                showingSelectExercises = true
+            }
         }
-        .navigationTitle("Rep Scheme")
+        .navigationTitle("Workout exercises")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -46,10 +63,11 @@ struct AddWorkoutExercisesScreen: View {
                 } label: {
                     Text("Next")
                 }
+                .disabled(addWorkoutService.workoutExercises.isEmpty)
             }
         }
-        .onAppear {
-            addWorkoutService.updateWorkoutExercises()
+        .sheet(isPresented: $showingSelectExercises) {
+            SelectWorkoutExercisesScreen(addWorkoutService: addWorkoutService, showingAddWorkout: $showingAddWorkout)
         }
     }
 }

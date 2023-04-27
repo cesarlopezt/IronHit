@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SelectWorkoutExercisesScreen: View {
+    @Environment(\.dismiss) var dismiss
     @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) var exercises: FetchedResults<Exercise>
     
     @ObservedObject var addWorkoutService: AddWorkoutService
@@ -15,42 +16,50 @@ struct SelectWorkoutExercisesScreen: View {
 
     @State private var searchQuery = ""
     @State private var selectedTags: Set<Tag> = []
+    @State private var selectedExercises: Set<Exercise> =  []
 
     var body: some View {
-        // TODO: I Could probably use the selection param in lists and set EditMode to true
-        ExerciseList(
-            contains: searchQuery,
-            with: $selectedTags,
-            showingTagFilters: .constant(true),
-            showingAddExercise: .constant(false),
-            usingFilters: true
-        ) { exercise in
-            Button {
-                if (addWorkoutService.exercises.contains(exercise)) {
-                    addWorkoutService.exercises.remove(exercise)
-                } else {
-                    addWorkoutService.exercises.insert(exercise)
-                }
-            } label: {
-                HStack {
-                    Image(systemName: addWorkoutService.exercises.contains(exercise) ? "checkmark.circle.fill" : "circle")
-                    Text(exercise.wrappedName)
-                }
-                .foregroundColor(.primary)
-            }
-        }
-        .navigationTitle("Select exercises")
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                NavigationLink {
-                    AddWorkoutExercisesScreen(addWorkoutService: addWorkoutService, showingAddWorkout: $showingAddWorkout)
+        NavigationView {
+            // TODO: I Could probably use the selection param in lists and set EditMode to true
+            ExerciseList(
+                contains: searchQuery,
+                with: $selectedTags,
+                showingTagFilters: .constant(true),
+                showingAddExercise: .constant(false),
+                usingFilters: true
+            ) { exercise in
+                Button {
+                    if (selectedExercises.contains(exercise)) {
+                        selectedExercises.remove(exercise)
+                    } else {
+                        selectedExercises.insert(exercise)
+                    }
                 } label: {
-                    Text("Next")
+                    HStack {
+                        Image(systemName: selectedExercises.contains(exercise) ? "checkmark.circle.fill" : "circle")
+                        Text(exercise.wrappedName)
+                    }
+                    .foregroundColor(.primary)
                 }
-                .disabled(addWorkoutService.exercises.isEmpty)
             }
+            .navigationTitle("Select exercises")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Close") {
+                        dismiss()
+                    }
+                }
+
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Add") {
+                        addWorkoutService.addExercises(exercises: selectedExercises)
+                        dismiss()
+                    }
+                    .disabled(selectedExercises.isEmpty)
+                }
+            }
+            .searchable(text: $searchQuery, placement: .navigationBarDrawer(displayMode: .always))
         }
-        .searchable(text: $searchQuery, placement: .navigationBarDrawer(displayMode: .always))
     }
 }

@@ -61,7 +61,10 @@ struct WorkoutListScreen: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     // TODO: Adapt to new iOS navigation API and fix this deprecation
-                    NavigationLink(destination: AddWorkoutScreen(showingAddWorkout: $showingAddWorkout), isActive: $showingAddWorkout) {
+                    NavigationLink(
+                        destination: AddWorkoutScreen(moc: moc, showingAddWorkout: $showingAddWorkout),
+                        isActive: $showingAddWorkout
+                    ) {
                         Label("Add Workout", systemImage: "plus")
                     }
                 }

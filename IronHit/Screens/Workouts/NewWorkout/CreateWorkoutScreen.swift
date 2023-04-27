@@ -27,7 +27,7 @@ struct CreateWorkoutScreen: View {
             
             Section {
                 ForEach(addWorkoutService.workoutExercises) {
-                    RepsSchemeCell(exerciseName: $0.exercise.wrappedName, reps: $0.reps, sets: $0.sets, showReorder: true)
+                    RepsSchemeCell(exerciseName: $0.wrappedExerciseName, reps: $0.reps, sets: $0.sets, showReorder: true)
                 }
                 .onMove { source, destination in
                     addWorkoutService.workoutExercises.move(fromOffsets: source, toOffset: destination)
@@ -55,12 +55,7 @@ struct CreateWorkoutScreen: View {
         workout.name = addWorkoutService.name
         workout.desc = addWorkoutService.description
 
-        for (index, repScheme) in Array(addWorkoutService.workoutExercises.enumerated()) {
-            let workoutExercise = WorkoutExercise(context: moc)
-            workoutExercise.id = UUID()
-            workoutExercise.exercise = repScheme.exercise
-            workoutExercise.reps = repScheme.reps
-            workoutExercise.sets = repScheme.sets
+        for (index, workoutExercise) in Array(addWorkoutService.workoutExercises.enumerated()) {
             workoutExercise.order = Int16(index)
             workoutExercise.workout = workout
         }

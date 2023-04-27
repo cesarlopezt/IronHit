@@ -9,10 +9,15 @@ import CoreData
 import SwiftUI
 
 struct AddWorkoutScreen: View {
-    @StateObject var addWorkoutService = AddWorkoutService()
+    @StateObject var addWorkoutService: AddWorkoutService
     @Binding var showingAddWorkout: Bool
 
     var body: some View {
-        SelectWorkoutExercisesScreen(addWorkoutService: addWorkoutService, showingAddWorkout: $showingAddWorkout)
+        AddWorkoutExercisesScreen(addWorkoutService: addWorkoutService, showingAddWorkout: $showingAddWorkout)
+    }
+    
+    init(moc: NSManagedObjectContext, showingAddWorkout: Binding<Bool>, workout: Workout? = nil) {
+        self._showingAddWorkout = showingAddWorkout
+        _addWorkoutService = StateObject(wrappedValue: AddWorkoutService(moc: moc))
     }
 }

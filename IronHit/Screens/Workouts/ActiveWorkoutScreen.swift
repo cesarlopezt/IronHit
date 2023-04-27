@@ -18,7 +18,7 @@ private struct ExerciseCell: View {
         } label: {
             HStack {
                 Image(systemName: exerciseLog.isCompleted ? "checkmark.circle.fill" : "circle")
-                Text(exerciseLog.exercise?.wrappedName ?? "")
+                Text(exerciseLog.wrappedExerciseName)
                     .strikethrough(isStriked)
                 Spacer()
                 Text("\(exerciseLog.workoutExercise?.reps ?? 0)x\(exerciseLog.workoutExercise?.sets ?? 0)")
@@ -87,9 +87,9 @@ struct ActiveWorkoutScreen: View {
             }
             .sheet(isPresented: $showingWorkoutDetail) {
                 NavigationView {
-                    WorkoutDetailScreen(workout: workout, showingActiveWorkout: $showingActiveWorkout, hasActiveWorkout: true, showingStartButton: false)
+                    WorkoutDetailScreen(workout: workout, showingActiveWorkout: $showingActiveWorkout, hasActiveWorkout: true, isViewMode: true)
                         .toolbar {
-                            ToolbarItem {
+                            ToolbarItem(placement: .navigationBarLeading) {
                                 Button("Close") {
                                     showingWorkoutDetail = false
                                 }

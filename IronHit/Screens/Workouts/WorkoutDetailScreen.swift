@@ -17,7 +17,7 @@ private struct ExerciseCell: View {
                 EmptyView()
             }
         } label: {
-            RepsSchemeCell(exerciseName: workoutExercise.exercise?.wrappedName ?? "", reps: workoutExercise.reps, sets: workoutExercise.sets)
+            RepsSchemeCell(exerciseName: workoutExercise.wrappedExerciseName, reps: workoutExercise.reps, sets: workoutExercise.sets)
         }
     }
 }
@@ -27,9 +27,12 @@ struct WorkoutDetailScreen: View {
     @Environment(\.managedObjectContext) var moc
     var workout: Workout
     @State private var showingDelete = false
+    @State private var showingEditWorkout = false
+    
+    // Active workout management
     @Binding var showingActiveWorkout: Bool
     var hasActiveWorkout: Bool
-    var showingStartButton: Bool = true
+    var isViewMode: Bool = false
     
     var body: some View {
         Form {
@@ -49,7 +52,7 @@ struct WorkoutDetailScreen: View {
             }
         }
         .overlay(alignment: .bottom) {
-            if (showingStartButton) {
+            if (!isViewMode) {
                 Button("Start workout") {
                     let workoutLog = WorkoutLog(context: moc)
                     workoutLog.id = UUID()
@@ -65,6 +68,7 @@ struct WorkoutDetailScreen: View {
                         exerciseLog.workoutExercise = exerciseEntry
                         exerciseLog.isCompleted = false
                     }
+                    try? moc.save()
                     showingActiveWorkout = true
                 }
                 .font(.title3)
@@ -82,10 +86,24 @@ struct WorkoutDetailScreen: View {
         })
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button {
-                    showingDelete = true
-                } label: {
-                    Label("Delete", systemImage: "trash")
+                if (!isViewMode) {
+                    HStack {
+                        NavigationLink(
+                            destination: AddWorkoutScreen(
+                                moc: moc,
+                                showingAddWorkout: $showingEditWorkout,
+                                workout: workout
+                            ),
+                            isActive: $showingEditWorkout
+                        ) {
+                            Label("Edit Workout", systemImage: "square.and.pencil")
+                        }
+                        Button {
+                            showingDelete = true
+                        } label: {
+                            Label("Delete", systemImage: "trash")
+                        }
+                    }
                 }
             }
         }

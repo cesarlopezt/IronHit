@@ -12,7 +12,7 @@ private struct ExerciseCell: View {
     
     var body: some View {
         HStack {
-            Text(exerciseLog.exercise?.wrappedName ?? "")
+            Text(exerciseLog.wrappedExerciseName)
             Spacer()
             Text("\(exerciseLog.workoutExercise?.reps ?? 0)x\(exerciseLog.workoutExercise?.sets ?? 0)")
         }
