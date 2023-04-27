@@ -12,8 +12,6 @@ struct SelectWorkoutExercisesScreen: View {
     @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) var exercises: FetchedResults<Exercise>
     
     @ObservedObject var addWorkoutService: AddWorkoutService
-    @Binding var showingAddWorkout: Bool
-
     @State private var searchQuery = ""
     @State private var selectedTags: Set<Tag> = []
     @State private var selectedExercises: Set<Exercise> =  []

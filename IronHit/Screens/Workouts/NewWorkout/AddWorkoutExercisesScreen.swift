@@ -67,7 +67,7 @@ struct AddWorkoutExercisesScreen: View {
             }
         }
         .sheet(isPresented: $showingSelectExercises) {
-            SelectWorkoutExercisesScreen(addWorkoutService: addWorkoutService, showingAddWorkout: $showingAddWorkout)
+            SelectWorkoutExercisesScreen(addWorkoutService: addWorkoutService)
         }
     }
 }

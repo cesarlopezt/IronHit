@@ -18,6 +18,10 @@ struct AddWorkoutScreen: View {
     
     init(moc: NSManagedObjectContext, showingAddWorkout: Binding<Bool>, workout: Workout? = nil) {
         self._showingAddWorkout = showingAddWorkout
-        _addWorkoutService = StateObject(wrappedValue: AddWorkoutService(moc: moc))
+        if let workout {
+            _addWorkoutService = StateObject(wrappedValue: AddWorkoutService(moc: moc, workoutToEdit: workout))
+        } else {
+            _addWorkoutService = StateObject(wrappedValue: AddWorkoutService(moc: moc))
+        }
     }
 }

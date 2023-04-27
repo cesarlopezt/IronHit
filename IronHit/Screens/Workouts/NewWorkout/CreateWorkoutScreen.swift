@@ -42,24 +42,11 @@ struct CreateWorkoutScreen: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Save") {
-                    saveWorkout()
+                    addWorkoutService.saveWorkout()
+                    showingAddWorkout = false
                 }
                 .disabled(addWorkoutService.isSaveDisabled)
             }
         }
-    }
-    
-    func saveWorkout() {
-        let workout = Workout(context: moc)
-        workout.id = UUID()
-        workout.name = addWorkoutService.name
-        workout.desc = addWorkoutService.description
-
-        for (index, workoutExercise) in Array(addWorkoutService.workoutExercises.enumerated()) {
-            workoutExercise.order = Int16(index)
-            workoutExercise.workout = workout
-        }
-        try? moc.save()
-        showingAddWorkout = false
     }
 }

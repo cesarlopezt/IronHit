@@ -38,18 +38,32 @@ import Foundation
         return workoutExercise
     }
     
-    init(moc: NSManagedObjectContext) {
-        self.moc = moc
+    func saveWorkout() {
+        let workout: Workout
+        
+        if let workoutToEdit {
+            workout = workoutToEdit
+        } else {        
+            workout = Workout(context: moc)
+            workout.id = UUID()
+        }
+        workout.name = name
+        workout.desc = description
+
+        for (index, workoutExercise) in Array(workoutExercises.enumerated()) {
+            workoutExercise.order = Int16(index)
+            workoutExercise.workout = workout
+        }
+        try? moc.save()
     }
     
-//    init(workoutToEdit: Workout? = nil) {
-//        self.workoutToEdit = workoutToEdit
-//        guard let workoutToEdit else { return }
-//        name = workoutToEdit.wrappedName
-//        description = workoutToEdit.desc ?? ""
-//        exercises = Set(workoutToEdit.exerciseEntriesArray.compactMap({ $0.exercise }))
-//        workoutExercises = workoutToEdit.exerciseEntriesArray.compactMap({ workoutExercise in
-//            ExerciseRepsScheme(exercise: <#T##Exercise#>, reps: <#T##Int16#>, sets: <#T##Int16#>)
-//        })
-//    }
+    init(moc: NSManagedObjectContext, workoutToEdit: Workout? = nil) {
+        self.moc = moc
+        
+        guard let workoutToEdit else { return }
+        self.workoutToEdit = workoutToEdit
+        name = workoutToEdit.wrappedName
+        description = workoutToEdit.desc ?? ""
+        workoutExercises = workoutToEdit.exerciseEntriesArray
+    }
 }

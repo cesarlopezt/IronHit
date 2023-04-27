@@ -26,7 +26,6 @@
 		DBCD19DB29E9F8780061E615 /* AddWorkoutService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCD19DA29E9F8780061E615 /* AddWorkoutService.swift */; };
 		DBCD19DD29E9FB7A0061E615 /* SelectWorkoutExercisesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCD19DC29E9FB7A0061E615 /* SelectWorkoutExercisesScreen.swift */; };
 		DBCD19DF29E9FDA20061E615 /* CreateWorkoutScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCD19DE29E9FDA20061E615 /* CreateWorkoutScreen.swift */; };
-		DBCD19E129EA0D520061E615 /* ExerciseRepsScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCD19E029EA0D520061E615 /* ExerciseRepsScheme.swift */; };
 		DBCD19E329EB89BC0061E615 /* WorkoutDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCD19E229EB89BC0061E615 /* WorkoutDetailScreen.swift */; };
 		DBCD19E529EDAC180061E615 /* RepsSchemeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCD19E429EDAC180061E615 /* RepsSchemeCell.swift */; };
 		DBCD1A0129EE450C0061E615 /* ActiveWorkoutScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCD1A0029EE450C0061E615 /* ActiveWorkoutScreen.swift */; };
@@ -62,7 +61,6 @@
 		DBCD19DA29E9F8780061E615 /* AddWorkoutService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkoutService.swift; sourceTree = "<group>"; };
 		DBCD19DC29E9FB7A0061E615 /* SelectWorkoutExercisesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectWorkoutExercisesScreen.swift; sourceTree = "<group>"; };
 		DBCD19DE29E9FDA20061E615 /* CreateWorkoutScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateWorkoutScreen.swift; sourceTree = "<group>"; };
-		DBCD19E029EA0D520061E615 /* ExerciseRepsScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseRepsScheme.swift; sourceTree = "<group>"; };
 		DBCD19E229EB89BC0061E615 /* WorkoutDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDetailScreen.swift; sourceTree = "<group>"; };
 		DBCD19E429EDAC180061E615 /* RepsSchemeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepsSchemeCell.swift; sourceTree = "<group>"; };
 		DBCD1A0029EE450C0061E615 /* ActiveWorkoutScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveWorkoutScreen.swift; sourceTree = "<group>"; };
@@ -146,7 +144,6 @@
 				DBCD19C429E717300061E615 /* Tag+Wrapped.swift */,
 				DBCD19CF29E8ADFC0061E615 /* Workout+Wrapped.swift */,
 				DBCD1A0229EEEF5B0061E615 /* WorkoutLog+Wrapped.swift */,
-				DBCD19E029EA0D520061E615 /* ExerciseRepsScheme.swift */,
 				DBCD1A1329F9F2D90061E615 /* WorkoutExercise+Wrapped.swift */,
 				DBCD1A1529F9F3BA0061E615 /* ExerciseLog+Wrapped.swift */,
 			);
@@ -288,7 +285,6 @@
 				DBCD19BB29E50B7E0061E615 /* IronHit.xcdatamodeld in Sources */,
 				DBCD1A0C29F2C6D60061E615 /* ExerciseList.swift in Sources */,
 				DBCD19D229E8B4090061E615 /* AddWorkoutScreen.swift in Sources */,
-				DBCD19E129EA0D520061E615 /* ExerciseRepsScheme.swift in Sources */,
 				DBCD1A0129EE450C0061E615 /* ActiveWorkoutScreen.swift in Sources */,
 				DBCD1A0E29F2D39C0061E615 /* FilterByTagsSection.swift in Sources */,
 				DBCD19CE29E8AC830061E615 /* WorkoutListScreen.swift in Sources */,
