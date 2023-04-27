@@ -16,7 +16,7 @@ import Foundation
     @Published var workoutToEdit: Workout?
     
     var isSaveDisabled: Bool {
-        name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && workoutExercises.isEmpty
+        name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || workoutExercises.isEmpty
     }
     
     func addExercises(exercises: Set<Exercise>) {
