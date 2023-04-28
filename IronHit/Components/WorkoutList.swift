@@ -12,7 +12,6 @@ struct WorkoutList<RowContent: View, ActiveWorkout: View>: View {
 
     @ViewBuilder var rowContent: (Workout) -> RowContent
     @ViewBuilder var activeWorkout: () -> ActiveWorkout
-    @Binding var showingAddWorkout: Bool
     var usingFilters: Bool
     
     var body: some View {
@@ -22,9 +21,7 @@ struct WorkoutList<RowContent: View, ActiveWorkout: View>: View {
                     Text("This is a little empty, add some workouts.")
                 }
             } else {
-                Button {
-                    showingAddWorkout.toggle()
-                } label: {
+                NavigationLink(value: "addWorkout") {
                     Label("Add your first workout", systemImage: "plus")
                 }
             }
@@ -41,13 +38,11 @@ struct WorkoutList<RowContent: View, ActiveWorkout: View>: View {
     
     init(
         contains name: String,
-        showingAddWorkout: Binding<Bool>,
         usingFilters: Bool,
         rowContent: @escaping (Workout) -> RowContent,
         activeWorkout: @escaping () -> ActiveWorkout
     ) {
         self.usingFilters = usingFilters
-        self._showingAddWorkout = showingAddWorkout
         
         var predicates: [NSPredicate] = [NSPredicate(format: "isShown == true")]
         let nameIsEmpty = name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
@@ -67,7 +62,7 @@ struct WorkoutList<RowContent: View, ActiveWorkout: View>: View {
 
 struct WorkoutList_Previews: PreviewProvider {
     static var previews: some View {
-        WorkoutList(contains: "", showingAddWorkout: .constant(false), usingFilters: true) {
+        WorkoutList(contains: "", usingFilters: true) {
             Text($0.wrappedName)
         } activeWorkout: {
             Text("Active")

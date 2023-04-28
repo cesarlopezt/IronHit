@@ -15,11 +15,15 @@ class NavigationHandler: ObservableObject {
     }
 }
 
+struct WorkoutDestination: Hashable {
+    var workout: Workout
+    var destination: String
+}
+
 struct WorkoutListScreen: View {
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) var workouts: FetchedResults<Workout>
     @FetchRequest(sortDescriptors: [], predicate: NSPredicate(format: "isCompleted == false")) var workoutLogs: FetchedResults<WorkoutLog>
-    @State private var showingAddWorkout = false
     @State private var queryString = ""
     @StateObject var navigationHandler = NavigationHandler()
     
@@ -28,15 +32,9 @@ struct WorkoutListScreen: View {
             VStack {
                 WorkoutList(
                     contains: queryString,
-                    showingAddWorkout: $showingAddWorkout,
                     usingFilters: !queryString.isEmpty
                 ) { workout in
-                    NavigationLink(
-                        destination: WorkoutDetailScreen(
-                            workout: workout,
-                            hasActiveWorkout: !workoutLogs.isEmpty
-                        )
-                    ) {
+                    NavigationLink(value: WorkoutDestination(workout: workout, destination: "detail")) {
                         VStack(alignment: .leading, spacing: 5) {
                             Text(workout.wrappedName)
                         }
@@ -60,11 +58,7 @@ struct WorkoutListScreen: View {
             .navigationTitle("Workouts")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    // TODO: Adapt to new iOS navigation API and fix this deprecation
-                    NavigationLink(
-                        destination: AddWorkoutScreen(moc: moc, showingAddWorkout: $showingAddWorkout),
-                        isActive: $showingAddWorkout
-                    ) {
+                    NavigationLink(value: "addWorkout") {
                         Label("Add Workout", systemImage: "plus")
                     }
                 }
@@ -72,6 +66,21 @@ struct WorkoutListScreen: View {
             .searchable(text: $queryString)
             .navigationDestination(for: WorkoutLog.self) { workoutLog in
                 ActiveWorkoutScreen(workoutLog: workoutLogs.first)
+            }
+            .navigationDestination(for: String.self) { val in
+                if val == "addWorkout" {
+                    AddWorkoutScreen(moc: moc)
+                }
+            }
+            .navigationDestination(for: WorkoutDestination.self) { workoutDestination in
+                if workoutDestination.destination == "detail" {
+                    WorkoutDetailScreen(
+                        workout: workoutDestination.workout,
+                        hasActiveWorkout: !workoutLogs.isEmpty
+                    )
+                } else if workoutDestination.destination == "edit" {
+                    AddWorkoutScreen(moc: moc, workout: workoutDestination.workout)
+                }
             }
         }
         .environmentObject(navigationHandler)

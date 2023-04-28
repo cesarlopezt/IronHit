@@ -11,8 +11,8 @@ import SwiftUI
 struct CreateWorkoutScreen: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.managedObjectContext) var moc
+    @EnvironmentObject var navigationHandler: NavigationHandler
     @ObservedObject var addWorkoutService: AddWorkoutService
-    @Binding var showingAddWorkout: Bool
     
     var body: some View {
         Form {
@@ -43,7 +43,7 @@ struct CreateWorkoutScreen: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Save") {
                     addWorkoutService.saveWorkout()
-                    showingAddWorkout = false
+                    navigationHandler.removeAll()
                 }
                 .disabled(addWorkoutService.isSaveDisabled)
             }

@@ -69,6 +69,7 @@ struct WorkoutDetailScreen: View {
                         exerciseLog.isCompleted = false
                     }
                     try? moc.save()
+                    navigationHandler.removeAll()
                     navigationHandler.path.append(workoutLog)
                 }
                 .font(.title3)
@@ -88,14 +89,7 @@ struct WorkoutDetailScreen: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 if (!isViewOnlyMode) {
                     HStack {
-                        NavigationLink(
-                            destination: AddWorkoutScreen(
-                                moc: moc,
-                                showingAddWorkout: $showingEditWorkout,
-                                workout: workout
-                            ),
-                            isActive: $showingEditWorkout
-                        ) {
+                        NavigationLink(value: WorkoutDestination(workout: workout, destination: "edit")) {
                             Label("Edit Workout", systemImage: "square.and.pencil")
                         }
                         Button {
