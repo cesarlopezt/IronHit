@@ -8,6 +8,10 @@
 import Foundation
 
 extension WorkoutLog {
+    public var wrappedWorkoutName: String {
+        workout?.name ?? ""
+    }
+    
     public var exerciseLogArray: [ExerciseLog] {
         let set = exerciseLogs as? Set<ExerciseLog> ?? []
         

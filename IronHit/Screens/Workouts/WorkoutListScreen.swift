@@ -7,16 +7,24 @@
 
 import SwiftUI
 
+class NavigationHandler: ObservableObject {
+    @Published var path = NavigationPath()
+    
+    func removeAll() {
+        path.removeLast(path.count)
+    }
+}
+
 struct WorkoutListScreen: View {
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) var workouts: FetchedResults<Workout>
     @FetchRequest(sortDescriptors: [], predicate: NSPredicate(format: "isCompleted == false")) var workoutLogs: FetchedResults<WorkoutLog>
     @State private var showingAddWorkout = false
-    @State private var showingActiveWorkout = false
     @State private var queryString = ""
+    @StateObject var navigationHandler = NavigationHandler()
     
     var body: some View {
-        NavigationView {
+        NavigationStack(path: $navigationHandler.path) {
             VStack {
                 WorkoutList(
                     contains: queryString,
@@ -26,7 +34,6 @@ struct WorkoutListScreen: View {
                     NavigationLink(
                         destination: WorkoutDetailScreen(
                             workout: workout,
-                            showingActiveWorkout: $showingActiveWorkout,
                             hasActiveWorkout: !workoutLogs.isEmpty
                         )
                     ) {
@@ -39,11 +46,7 @@ struct WorkoutListScreen: View {
                         if (!workoutLogs.isEmpty) {
                             Section {
                                 ForEach(workoutLogs) { workoutLog in
-                                    NavigationLink {
-                                        ActiveWorkoutScreen(workoutLog: workoutLog, showingActiveWorkout: .constant(true))
-                                    } label: {
-                                        Text(workoutLog.workout?.wrappedName ?? "")
-                                    }
+                                    NavigationLink(workoutLog.wrappedWorkoutName, value: workoutLog)
                                 }
                             } header: {
                                 Text("Current workout")
@@ -52,9 +55,6 @@ struct WorkoutListScreen: View {
                             EmptyView()
                         }
                     }
-                }
-                NavigationLink(destination: ActiveWorkoutScreen(workoutLog: workoutLogs.first, showingActiveWorkout: $showingActiveWorkout), isActive: $showingActiveWorkout) {
-                    EmptyView()
                 }
             }
             .navigationTitle("Workouts")
@@ -70,7 +70,11 @@ struct WorkoutListScreen: View {
                 }
             }
             .searchable(text: $queryString)
+            .navigationDestination(for: WorkoutLog.self) { workoutLog in
+                ActiveWorkoutScreen(workoutLog: workoutLogs.first)
+            }
         }
+        .environmentObject(navigationHandler)
     }
 }
 

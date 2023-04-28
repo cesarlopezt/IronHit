@@ -56,14 +56,14 @@ struct WorkoutLogDetailScreen: View {
             }
         }
         .listStyle(.sidebar)
-        .navigationTitle(workoutLog.workout?.wrappedName ?? "")
+        .navigationTitle(workoutLog.wrappedWorkoutName)
         .navigationBarTitleDisplayMode(.inline)
         .alert("Delete Workout Log", isPresented: $showingDelete, actions: {
             Button("Delete", role: .destructive) {
                 moc.delete(workoutLog)
             }
         }, message: {
-            Text("Are you sure you want to delete this log of \(workoutLog.workout?.wrappedName ?? "")?")
+            Text("Are you sure you want to delete this log of \(workoutLog.wrappedWorkoutName)?")
         })
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {

@@ -12,7 +12,7 @@ private struct ExerciseCell: View {
     var body: some View {
         NavigationLink {
             if let exercise = workoutExercise.exercise {
-                ExerciseDetailScreen(exercise: exercise)
+                ExerciseDetailScreen(exercise: exercise, isViewOnlyMode: true)
             } else {
                 EmptyView()
             }
@@ -24,15 +24,15 @@ private struct ExerciseCell: View {
 
 
 struct WorkoutDetailScreen: View {
+    @EnvironmentObject var navigationHandler: NavigationHandler
     @Environment(\.managedObjectContext) var moc
     var workout: Workout
     @State private var showingDelete = false
     @State private var showingEditWorkout = false
     
     // Active workout management
-    @Binding var showingActiveWorkout: Bool
     var hasActiveWorkout: Bool
-    var isViewMode: Bool = false
+    var isViewOnlyMode: Bool = false
     
     var body: some View {
         Form {
@@ -52,7 +52,7 @@ struct WorkoutDetailScreen: View {
             }
         }
         .overlay(alignment: .bottom) {
-            if (!isViewMode) {
+            if (!isViewOnlyMode) {
                 Button("Start workout") {
                     let workoutLog = WorkoutLog(context: moc)
                     workoutLog.id = UUID()
@@ -69,7 +69,7 @@ struct WorkoutDetailScreen: View {
                         exerciseLog.isCompleted = false
                     }
                     try? moc.save()
-                    showingActiveWorkout = true
+                    navigationHandler.path.append(workoutLog)
                 }
                 .font(.title3)
                 .buttonStyle(.borderedProminent)
@@ -86,7 +86,7 @@ struct WorkoutDetailScreen: View {
         })
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                if (!isViewMode) {
+                if (!isViewOnlyMode) {
                     HStack {
                         NavigationLink(
                             destination: AddWorkoutScreen(

@@ -30,12 +30,12 @@ private struct ExerciseCell: View {
 
 struct ActiveWorkoutScreen: View {
     @Environment(\.managedObjectContext) var moc
+    @EnvironmentObject var navigationHandler: NavigationHandler
     var workoutLog: WorkoutLog?
     @FetchRequest var completedExerciseLogs: FetchedResults<ExerciseLog>
     @FetchRequest var exerciseLogs: FetchedResults<ExerciseLog>
     @State private var isWorkoutDone = false
     @State private var showingWorkoutDetail: Bool = false
-    @Binding var showingActiveWorkout: Bool
 
     var body: some View {
         if let workoutLog, let workout = workoutLog.workout {
@@ -87,7 +87,7 @@ struct ActiveWorkoutScreen: View {
             }
             .sheet(isPresented: $showingWorkoutDetail) {
                 NavigationView {
-                    WorkoutDetailScreen(workout: workout, showingActiveWorkout: $showingActiveWorkout, hasActiveWorkout: true, isViewMode: true)
+                    WorkoutDetailScreen(workout: workout, hasActiveWorkout: true, isViewOnlyMode: true)
                         .toolbar {
                             ToolbarItem(placement: .navigationBarLeading) {
                                 Button("Close") {
@@ -109,7 +109,7 @@ struct ActiveWorkoutScreen: View {
         workoutLog.isCompleted = true
         workoutLog.finishedAt = Date.now
         try? moc.save()
-        showingActiveWorkout = false
+        navigationHandler.removeAll()
     }
 
     func toggleExerciseLog(exerciseLog: ExerciseLog) -> Void {
@@ -118,8 +118,7 @@ struct ActiveWorkoutScreen: View {
         try? moc.save()
     }
     
-    init(workoutLog: WorkoutLog?, showingActiveWorkout: Binding<Bool>) {
-        self._showingActiveWorkout = showingActiveWorkout
+    init(workoutLog: WorkoutLog?) {
         if let workoutLog {
             self.workoutLog = workoutLog
             _completedExerciseLogs = FetchRequest<ExerciseLog>(sortDescriptors: [SortDescriptor(\.workoutExercise?.order)], predicate: NSPredicate(format: "isCompleted == true AND workoutLog == %@", workoutLog))

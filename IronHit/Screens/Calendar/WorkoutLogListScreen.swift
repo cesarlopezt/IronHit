@@ -27,7 +27,7 @@ struct WorkoutLogListScreen: View {
                                     WorkoutLogDetailScreen(workoutLog: workoutLog)
                                 } label: {
                                     HStack {
-                                        Text(workoutLog.workout?.wrappedName ?? "")
+                                        Text(workoutLog.wrappedWorkoutName)
                                         Spacer()
                                         if(!workoutLog.isCompleted) {
                                             Text("CURRENT")

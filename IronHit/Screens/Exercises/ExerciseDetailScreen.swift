@@ -14,6 +14,7 @@ struct ExerciseDetailScreen: View {
     @State private var showingEdit = false
     // TODO: Find a better way, refreshId UUID is to refresh the page when edited
     @State private var refreshId = UUID()
+    var isViewOnlyMode = false
     
     var body: some View {
         Form {
@@ -32,16 +33,18 @@ struct ExerciseDetailScreen: View {
         })
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                HStack {
-                    Button {
-                        showingEdit = true
-                    } label: {
-                        Label("Edit", systemImage: "square.and.pencil")
-                    }
-                    Button {
-                        showingDelete = true
-                    } label: {
-                        Label("Delete", systemImage: "trash")
+                if (!isViewOnlyMode) {
+                    HStack {
+                        Button {
+                            showingEdit = true
+                        } label: {
+                            Label("Edit", systemImage: "square.and.pencil")
+                        }
+                        Button {
+                            showingDelete = true
+                        } label: {
+                            Label("Delete", systemImage: "trash")
+                        }
                     }
                 }
             }
