@@ -12,6 +12,14 @@ IronHit is an iOS app built with SwiftUI and Core Data. It serves as a tool to m
 ## Data Model
 ![image](https://user-images.githubusercontent.com/4370350/236078385-8bc4093c-81f7-4cc2-8924-c9ee7ead084f.png)
 
+## Walkthrough
+
+### Exercises and Tags
+https://user-images.githubusercontent.com/4370350/236081461-be1b3d28-44dd-4312-b718-d131f28e9775.mov
+
+
+### Workouts and Workout Log
+https://user-images.githubusercontent.com/4370350/236081790-25e44a5f-9da3-43eb-8ec4-5ae3dda3f676.mov
 
 ## Requirements
 * iOS 16.0+
