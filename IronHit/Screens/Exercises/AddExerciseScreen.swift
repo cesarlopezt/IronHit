@@ -66,10 +66,12 @@ struct AddExerciseScreen: View {
                         dismiss()
                     }
                 }
-                ToolbarItemGroup(placement: .keyboard) {
-                    Spacer()
-                    Button("OK") {
-                        descriptionFocused = false
+                if descriptionFocused {
+                    ToolbarItemGroup(placement: .keyboard) {
+                        Spacer()
+                        Button("OK") {
+                            descriptionFocused = false
+                        }
                     }
                 }
             }

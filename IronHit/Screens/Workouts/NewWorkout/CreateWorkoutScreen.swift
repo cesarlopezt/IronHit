@@ -49,10 +49,12 @@ struct CreateWorkoutScreen: View {
                 }
                 .disabled(addWorkoutService.isSaveDisabled)
             }
-            ToolbarItemGroup(placement: .keyboard) {
-                Spacer()
-                Button("OK") {
-                    descriptionFocused = false
+            if descriptionFocused {
+                ToolbarItemGroup(placement: .keyboard) {
+                    Spacer()
+                    Button("OK") {
+                        descriptionFocused = false
+                    }
                 }
             }
         }
