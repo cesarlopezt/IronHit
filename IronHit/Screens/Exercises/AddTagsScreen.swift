@@ -89,6 +89,7 @@ struct AddTagsScreen: View {
         if let tag {
             moc.delete(tag)
             try? moc.save()
+            selectedTags.remove(tag)
         }
     }
     
