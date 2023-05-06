@@ -31,6 +31,7 @@ struct AddTagsScreen: View {
                             addTag()
                         }
                         .buttonStyle(.borderless)
+                        .disabled(name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
                     }
                 }
                 if (tags.isEmpty) {

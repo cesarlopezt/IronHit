@@ -13,6 +13,7 @@ struct CreateWorkoutScreen: View {
     @Environment(\.managedObjectContext) var moc
     @EnvironmentObject var navigationHandler: NavigationHandler
     @ObservedObject var addWorkoutService: AddWorkoutService
+    @FocusState private var descriptionFocused: Bool
     
     var body: some View {
         Form {
@@ -21,6 +22,7 @@ struct CreateWorkoutScreen: View {
             Section {
                 TextEditor(text: $addWorkoutService.description)
                     .frame(height: 200)
+                    .focused($descriptionFocused)
             } header: {
                 Text("Description")
             }
@@ -46,6 +48,12 @@ struct CreateWorkoutScreen: View {
                     navigationHandler.removeAll()
                 }
                 .disabled(addWorkoutService.isSaveDisabled)
+            }
+            ToolbarItemGroup(placement: .keyboard) {
+                Spacer()
+                Button("OK") {
+                    descriptionFocused = false
+                }
             }
         }
     }

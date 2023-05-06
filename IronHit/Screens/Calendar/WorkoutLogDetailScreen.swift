@@ -45,7 +45,7 @@ struct WorkoutLogDetailScreen: View {
             
             Section {
                 if skippedExercises.isEmpty {
-                    Text("Good Job, no exercises were skipped.")
+                    Text("Good Job, no exercises were skipped!")
                 } else {
                     ForEach(skippedExercises) {
                         ExerciseCell(exerciseLog: $0)

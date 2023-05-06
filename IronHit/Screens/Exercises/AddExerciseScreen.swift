@@ -15,6 +15,8 @@ struct AddExerciseScreen: View {
     @State private var name = ""
     @State private var description = ""
     @State private var tags: Set<Tag> = []
+    @FocusState private var descriptionFocused: Bool
+
     var exerciseToUpdate: Exercise?
     
     var isSaveDisabled: Bool {
@@ -29,6 +31,7 @@ struct AddExerciseScreen: View {
                 Section {
                     TextEditor(text: $description)
                         .frame(height: 200)
+                        .focused($descriptionFocused)
                 } header: {
                     Text("Description")
                 }
@@ -61,6 +64,12 @@ struct AddExerciseScreen: View {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("Cancel") {
                         dismiss()
+                    }
+                }
+                ToolbarItemGroup(placement: .keyboard) {
+                    Spacer()
+                    Button("OK") {
+                        descriptionFocused = false
                     }
                 }
             }
