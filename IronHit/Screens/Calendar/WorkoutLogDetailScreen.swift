@@ -61,6 +61,7 @@ struct WorkoutLogDetailScreen: View {
         .alert("Delete Workout Log", isPresented: $showingDelete, actions: {
             Button("Delete", role: .destructive) {
                 moc.delete(workoutLog)
+                try? moc.save()
             }
         }, message: {
             Text("Are you sure you want to delete this log of \(workoutLog.wrappedWorkoutName)?")

@@ -87,6 +87,7 @@ struct AddTagsScreen: View {
     func deleteTag(_ tag: Tag?) {
         if let tag {
             moc.delete(tag)
+            try? moc.save()
         }
     }
     

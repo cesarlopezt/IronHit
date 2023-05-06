@@ -27,6 +27,7 @@ import Foundation
     func removeWorkoutExercise(at index: Int) {
         moc.delete(workoutExercises[index])
         workoutExercises.remove(at: index)
+        try? moc.save()
     }
 
     private func newWorkoutExercise(exercise: Exercise) -> WorkoutExercise {

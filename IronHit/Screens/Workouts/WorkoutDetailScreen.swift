@@ -84,7 +84,7 @@ struct WorkoutDetailScreen: View {
             Button("Delete", role: .destructive) { deleteWorkout() }
         }, message: {
             Text("Are you sure you want to delete \(workout.wrappedName)?")
-        })
+        }) 
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 if (!isViewOnlyMode) {
@@ -106,5 +106,6 @@ struct WorkoutDetailScreen: View {
     func deleteWorkout() {
         workout.isShown = false
         try? moc.save()
+        navigationHandler.removeAll()
     }
 }
