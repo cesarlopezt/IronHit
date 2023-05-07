@@ -21,7 +21,7 @@ struct AddWorkoutExercisesScreen: View {
                 if (addWorkoutService.workoutExercises.isEmpty) {
                     Text("Let's add the exercises for this workout.")
                 } else {
-                    Grid {
+                    Grid(alignment: .leading) {
                         GridRow {
                             Text("")
                             Text("Reps")

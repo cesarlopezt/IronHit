@@ -32,7 +32,7 @@ struct WorkoutLogDetailScreen: View {
         List {
             Section {
                 if completedExercises.isEmpty {
-                    Text("We should probably remove this one.")
+                    Text("No exercises completed, we should probably delete this one.")
                 } else {
                     ForEach(completedExercises) {
                         ExerciseCell(exerciseLog: $0)
