@@ -2,6 +2,8 @@
 
 IronHit is an iOS app built with SwiftUI and Core Data. It serves as a tool to manage your exercises, create workouts, and track your fitness progress. This readme file provides an overview of the app's features, functionality, and instructions for installation and usage.
 
+[<img alt="Download_on_the_App_Store" src="https://github.com/cesarlopezt/IronHit/assets/4370350/4edfb044-ee21-4926-b67c-5830b7b0606c">](https://apps.apple.com/us/app/ironhit-workout-tracker/id6448875839)
+
 ## Features
 * **Exercise Management**: Add, edit, and delete exercises to build your personalized exercise library.
 * **Tag Filtering**: Filter exercises based on tags to quickly find specific exercises.
